@@ -1,0 +1,2 @@
+https://refactoring.guru/design-patterns/facade
+https://www.bilibili.com/video/BV1pE411x7Mn
