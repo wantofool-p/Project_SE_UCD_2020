@@ -32,6 +32,7 @@ import facade.deck.treasureCard.StoneCard;
 import facade.deck.treasureCard.TreasureCard;
 import facade.deck.treasureCard.WaterRise;
 import facade.deck.treasureCard.WindCard;
+import facade.myNumManager.myNumManager;
 import facade.treasure.Chalice;
 import facade.treasure.Fire;
 import facade.treasure.Store;
@@ -195,6 +196,7 @@ public class Facade{
 		System.out.println("2: waterLevel=2 Normal");
 		System.out.println("3: waterLevel=3 Elite");
 		System.out.println("4: waterLevel=4 Legendary");
+		tempInt = myNumManager.inputNumberInRange("difficulty", 1, 4);
 		while(tempFlag){
 			System.out.print("choose difficulty (1~4):");
 			if (scanner.hasNextInt()) {

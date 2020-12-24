@@ -18,7 +18,7 @@ public interface myHintProvider {//the interface for the "Facade" class
 	//use
 	static void use(){};
 	//switch
-	static void switch(){};
+	static void handover(){};
 	//end
 	static void end(){};
 	//use a flood card // (has been override in the "Facade" class)
