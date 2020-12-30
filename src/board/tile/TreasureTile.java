@@ -1,0 +1,26 @@
+package board.tile;
+
+import java.util.ArrayList;
+
+import deck.treasureCard.TreasureCard;
+import treasure.TreasureType;
+
+public abstract class TreasureTile extends StdTile{
+	protected TreasureType treasureType;//which type of treasure would this island provide
+	public TreasureTile(String name){
+		super(name);
+	}
+	public ArrayList<Integer> callTreasure(ArrayList<TreasureCard> cards){//this method would be called when player is trying to get a treasure //called by StdRole.java
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+		for(int i=cards.size()-1; i>-1; i--){
+			if(cards.get(i).getTreasureType()==this.treasureType){
+				temp.add(i);
+			}
+		}
+		if(temp.size()>4){
+			temp.subList(0, 4);
+		}
+		return temp;
+	}
+	//TODO provide treasure
+}
