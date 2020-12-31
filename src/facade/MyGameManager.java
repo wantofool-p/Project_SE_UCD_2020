@@ -751,7 +751,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 												boolean ifNoExplorer=true;
 												for(StdRole i: this.board.getPlayerList()){
 													if(i.getClass()==Explorer.class){
-														ifNoExplorer=false
+														ifNoExplorer=false;
 														int[] tempCoord = i.getCoord();
 														StdTile tempTile;
 														int row=tempCoord[0]%2, col=tempCoord[1]%2;
