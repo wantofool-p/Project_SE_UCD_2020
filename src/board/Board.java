@@ -79,11 +79,11 @@ public class Board{
 		if(this.ifInit){
 			System.err.println("func init ERR -- has been called already");
 		} else {
-			this.rearrange(this.tile);
+			this.rearrange();
 			this.ifInit=true;
 		}
 	}
-	private void rearrange(Tile[][] tile){
+	private void rearrange(){
 		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		ArrayList<Integer> tempList2 = new ArrayList<Integer>();
 		for(int i=0;i<6*6;i++){
