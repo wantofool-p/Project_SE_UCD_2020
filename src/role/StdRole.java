@@ -309,7 +309,11 @@ public abstract class StdRole{
 		if(this.treasures.size()>0){
 			for(Treasure i: this.treasures){
 				System.out.print("  [Treasure ");
-				System.out.print(i.getName());
+				if(i==null){
+					System.out.print("null");
+				} else {
+					System.out.print(i.getName());
+				}
 				System.out.print("]");
 			}
 		}

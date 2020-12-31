@@ -3,12 +3,18 @@ package board.tile;
 import java.util.ArrayList;
 
 import deck.treasureCard.TreasureCard;
+import treasure.Treasure;
 import treasure.TreasureType;
 
 public abstract class TreasureTile extends StdTile{
 	protected TreasureType treasureType;//which type of treasure would this island provide
 	public TreasureTile(String name){
 		super(name);
+	}
+	@Override
+	public Treasure getTreasure(){
+		System.err.println("func getTreasure ERR -- class TreasureTile mistaken call");
+		return null;
 	}
 	@Override
 	public ArrayList<Integer> callTreasure(ArrayList<TreasureCard> cards){//this method would be called when player is trying to get a treasure //called by StdRole.java

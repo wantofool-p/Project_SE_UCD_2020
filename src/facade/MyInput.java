@@ -74,23 +74,31 @@ public interface MyInput {//the interface for the "Facade" class
 	static int inputOneNumber(String hint, int minValidNum, int maxValidNum) throws IOException{//looking for an in-list number
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
-		boolean flag = true;
+		boolean loopFlag = true;
+		boolean tempFlag = true;
 		int tempSum=0;
 		char tempChar;
-		System.out.println(hint);
-		str = br.readLine();
-		for(int i=0; i<str.length(); i++){
-			tempChar = str.charAt(i);
-			if((48<=tempChar)&&(tempChar<=57)){
-				flag = true;
-				tempSum*=10;
-				tempSum+=tempChar-48;
-			} else if(flag){
-				break;
+		while(loopFlag){
+			System.out.println(hint);
+			str = br.readLine();
+			tempSum=0;
+			for(int i=0; i<str.length(); i++){
+				tempChar = str.charAt(i);
+				if((48<=tempChar)&&(tempChar<=57)){
+					tempFlag = true;
+					tempSum*=10;
+					tempSum+=tempChar-48;
+				} else if(tempFlag){
+					break;
+				}
 			}
-		}
-		if(flag==false){
-			return -1;
+			if(tempFlag==false){
+				System.out.println("not int");
+			} else if((tempSum<minValidNum)||(maxValidNum<tempSum)){
+				System.out.println("not in range");
+			} else {
+				loopFlag=false;
+			}
 		}
 		return tempSum;
 	};

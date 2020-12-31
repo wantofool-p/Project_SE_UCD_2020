@@ -648,17 +648,30 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 								case 7://ability
 									if(this.selectedPlayer.getClass()==CheatCharacter.class){
 										System.out.println("1: get 20 Treasure cards (drop WaterRise)");
-										System.out.println("2: get 10 Treasure cards (applied WaterRise) ");
-										System.out.println("3: reset water meter to 9");
-										System.out.println("4: recover all tiles");
-										System.out.println("5: flood all tiles");
-										System.out.println("6: sink all tiles");
-										System.out.println("7: reset water meter to 1");
+										System.out.println("2: get 10 Treasure cards (applied WaterRise)");
+										System.out.println("3: recover all tiles");
+										System.out.println("4: flood all tiles");
+										System.out.println("5: sink all tiles");
+										System.out.println("6: reset water meter to 1");
+										System.out.println("7: reset water meter to 9");
 										System.out.println("8: get all treasures");
-										System.out.println("9: move all players to the Fools' Landing");
+										System.out.println("9: get all treasures and separates to every one");
+										System.out.println("10: move all players to the Fools' Landing");
+										System.out.println("11: set a player's AP to 99");
+										System.out.println("12: set a diagonally island for explorer");
+										System.out.println("13: force the diver into water and puts 1*1 cross-shaped guaranteed tiles surround him");
+										System.out.println("14: force the diver into water and puts 2*2 cross-shaped guaranteed tiles surround him");
+										System.out.println("15: force the diver into water and puts 3*3 cross-shaped guaranteed tiles surround him");
+										System.out.println("16: force the diver into water and puts 4*4 cross-shaped guaranteed tiles surround him");
+										System.out.println("17: force the diver into water and puts 5*5 cross-shaped guaranteed tiles surround him");
+										System.out.println("18: force the diver into water and puts 6*6 cross-shaped guaranteed tiles surround him");
+										System.out.println("19: add 10 HelicopterLift into your hand of cards");
+										System.out.println("20: add 10 SandBags into your hand of cards");
 										System.out.println("0: cancel");
-										tempChoose2 = MyInput.inputOneDigitNumber(("input:"), 0, 9);
+										tempChoose2 = MyInput.inputOneNumber(("input:"), 0, 20);
 										TreasureCard tempCard;
+										Treasure tempTreasure;
+										int guaranteedArea=0;
 										switch(tempChoose2){
 											case 1:
 												for(int i=0; i<20; i++){
@@ -687,35 +700,123 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 												}
 												break;
 											case 3:
-												this.waterMeter.setWaterMeter(9);
-												break;
-											case 4:
 												for(int id=0; id<24; id++){
 													this.board.getStdTile(id).setStatus(Status.NORMAL);
 												}
 												break;
-											case 5:
+											case 4:
 												for(int id=0; id<24; id++){
-													this.board.getStdTile(id).setStatus(Status.FLOODED);
+													this.board.getStdTile(id).flood();
 												}
 												break;
-											case 6:
+											case 5:
 												for(int id=0; id<24; id++){
 													this.board.getStdTile(id).setStatus(Status.SUNK);
 												}
 												break;
-											case 7:
+											case 6:
 												this.waterMeter.setWaterMeter(1);
+												break;
+											case 7:
+												this.waterMeter.setWaterMeter(9);
 												break;
 											case 8:
 												for(int i=10; i<18; i+=2){
-													this.selectedPlayer.getTreasures().add(this.board.getStdTile(i).getTreasure());
+													tempTreasure = this.board.getStdTile(i).getTreasure();
+													if(tempTreasure!=null){
+														this.selectedPlayer.getTreasures().add(tempTreasure);
+													}
 												}
 												break;
 											case 9:
+												for(int i=10, j=0; i<18 && j<4; i+=2, j++){
+													tempTreasure = this.board.getStdTile(i).getTreasure();
+													if(tempTreasure!=null){
+														this.board.getPlayerList().get(j%this.board.getPlayerList().size()).getTreasures().add(tempTreasure);
+													}
+												}
+												break;
+											case 10:
 												for(StdRole i:this.board.getPlayerList()){
 													i.getCurrStdTile().playerLeaves(i);
 													this.board.getStdTile(18).playerComes(i);
+												}
+												break;
+											case 11:
+												System.out.println("choose player:");
+												tempChoose2 = MyInput.inputOneDigitNumber(("input index for the player (0~" + this.board.getPlayerList().size() + "):"), 0, this.board.getPlayerList().size());
+												this.board.getPlayerList().get(tempChoose2-1).setAP(99);
+												break;
+											case 12:
+												boolean ifNoExplorer=true;
+												for(StdRole i: this.board.getPlayerList()){
+													if(i.getClass()==Explorer.class){
+														ifNoExplorer=false
+														int[] tempCoord = i.getCoord();
+														StdTile tempTile;
+														int row=tempCoord[0]%2, col=tempCoord[1]%2;
+														int tempCoord2;
+														if(row==col){
+															tempCoord2=0;
+														} else {
+															tempCoord2=1;
+														}
+														for(;tempCoord2<36;tempCoord2+=2){
+															tempTile = this.board.getStdTile(tempCoord2/6, tempCoord2%6);
+															if(tempTile!=null){
+																tempTile.setStatus(Status.SUNK);
+															}
+														}
+														break;
+													}
+												}
+												if(ifNoExplorer){
+													System.out.println("no explorer.");
+												}
+												break;
+											case 18:
+												guaranteedArea++;
+											case 17:
+												guaranteedArea++;
+											case 16:
+												guaranteedArea++;
+											case 15:
+												guaranteedArea++;
+											case 14:
+												guaranteedArea++;
+											case 13:
+												guaranteedArea++;
+												boolean ifNoDiver=true;
+												for(StdRole i: this.board.getPlayerList()){
+													if(i.getClass()==Diver.class){
+														ifNoDiver=false;
+														int[] tempCoord = i.getCoord();
+														StdTile tempTile;
+														for(int row=0;row<6;row++){
+															for(int col=0;col<6;col++){
+																if(((Math.abs(row-tempCoord[0]))+(Math.abs(col-tempCoord[1])))<=guaranteedArea){
+																	tempTile = this.board.getStdTile(row, col);
+																	if(tempTile!=null){
+																		tempTile.setStatus(Status.SUNK);
+																	}
+																}
+															}
+														}
+														break;
+													}
+												}
+												if(ifNoDiver){
+													System.out.println("no diver.");
+												}
+												break;
+											case 19:
+												for(int i=0; i<10; i++){
+													this.selectedPlayer.getCards().add(new HelicopterLift());
+												}
+												break;
+											case 20:
+												for(int i=0; i<10; i++){
+													this.selectedPlayer.getCards().add(new Sandbags());
 												}
 												break;
 											default:

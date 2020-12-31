@@ -14,6 +14,7 @@ import deck.treasureCard.Sandbags;
 import role.DirectionType;
 import role.Diver;
 import role.Explorer;
+import role.Messenger;
 import role.Navigator;
 import role.Pilot;
 import role.StdRole;
@@ -268,7 +269,9 @@ public interface MyOutput {
 		}
 		if(selectedPlayer.getCurrStdTile().getPlayers().size()==1){
 			passCardFlag.add(true);
-			System.out.print(" [No other player]");
+			if(selectedPlayer.getClass()!=Messenger.class){
+				System.out.print(" [No other player]");
+			}
 		} else {
 			passCardFlag.add(false);
 		}
