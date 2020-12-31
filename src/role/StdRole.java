@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import board.Board;
 import board.tile.Status;
 import board.tile.StdTile;
+import deck.TreasureDeck;
 import deck.treasureCard.TreasureCard;
 import treasure.Treasure;
+import treasure.TreasureType;
 public abstract class StdRole{
 	protected boolean isAlive=true;
 	protected int AP=0;//action points
@@ -236,7 +238,17 @@ public abstract class StdRole{
 			return true;
 		}
 	}
-	public boolean dropTreasureCard(int cardIndex){
+	public boolean dropTreasureCard(int cardIndex, TreasureDeck usedTreasureDeck){//card would not be pushed into any card deck
+		if(cards.size()==0){
+			return false;//if this player has no card
+		} else if(cards.size()<cardIndex+1){
+			return false;//if card index > the sum of curr player's cards
+		} else {
+			usedTreasureDeck.getStack().push(this.cards.remove(cardIndex));
+			return true;
+		}
+	}
+	public boolean removeTreasureCard(int cardIndex){//card would not be pushed into any card deck
 		if(cards.size()==0){
 			return false;//if this player has no card
 		} else if(cards.size()<cardIndex+1){
@@ -265,27 +277,30 @@ public abstract class StdRole{
 	}
 	protected void freePassCard(StdRole targetRole, int cardIndex){//assume a valid operation
 		targetRole.addTreasureCard(targetRole.getCards().get(cardIndex));
-		this.dropTreasureCard(cardIndex);
+		this.removeTreasureCard(cardIndex);
 	}
-	public boolean captureTreasure(){//assume a valid operation
+	public boolean captureTreasure(TreasureDeck usedTreasureDeck){//assume a valid operation
 		if(this.AP==0){
 			return false;//not enough AP
 		} else {
 			ArrayList<Integer> temp = this.currStdTile.callTreasure(this.cards);
-			if(temp.size()==4){
+			if(temp == null){
+				System.err.print(" func captureTreasure ERR -- temp == null");
+				return false;
+			} else if(temp.size()==4) {
 				Treasure tempTreasure = this.currStdTile.getTreasure();
 				if(tempTreasure==null){
 					return false;//failure
 				} else {
 					this.treasures.add(tempTreasure);
 					for(int i:temp){
-						this.dropTreasureCard(i);
+						this.dropTreasureCard(i, usedTreasureDeck);
 					}
 					this.AP--;
 					return true;//success
 				}
 			} else {
-				return false;//failure
+				return false;//not allowed
 			}
 		}
 	}
@@ -297,6 +312,34 @@ public abstract class StdRole{
 				System.out.print(i.getName());
 				System.out.print("]");
 			}
+		}
+		TreasureType tempTreasureType;
+		int countFire=0, countWind=0, countStore=0, countChalice=0;
+		for(TreasureCard i:this.getCards()){
+			tempTreasureType = i.getTreasureType();
+			if (tempTreasureType==TreasureType.FIRE){
+				countFire++;
+			} else if (tempTreasureType==TreasureType.WIND){
+				countWind++;
+			} else if (tempTreasureType==TreasureType.STONE){
+				countStore++;
+			} else if (tempTreasureType==TreasureType.CHALICE){
+				countChalice++;
+			} else {
+				;
+			}
+		}
+		if(countWind>=4){
+			System.out.print("  [WindCards>=4]");
+		}
+		if(countChalice>=4){
+			System.out.print("  [ChaliceCards>=4]");
+		}
+		if(countFire>=4){
+			System.out.print("  [FireCards>=4]");
+		}
+		if(countStore>=4){
+			System.out.print("  [StoreCards>=4]");
 		}
 		System.out.println();
 		for(TreasureCard i: cards){

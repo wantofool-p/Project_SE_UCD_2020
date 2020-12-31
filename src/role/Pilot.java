@@ -11,6 +11,7 @@ public class Pilot extends StdRole{
 	public Pilot(){
 		this.name="Pilot";
 	}
+	@Override
 	public void begin(){
 		this.AP=3;
 		this.ifAbilityUsed=false;
@@ -18,6 +19,7 @@ public class Pilot extends StdRole{
 	public boolean getIfAbilityUsed(){
 		return ifAbilityUsed;
 	}
+	@Override
 	public ArrayList<StdTile> sink(Board board){//return valid Tile List
 		ArrayList<StdTile> tempList = new ArrayList<StdTile>();
 		StdTile temp;

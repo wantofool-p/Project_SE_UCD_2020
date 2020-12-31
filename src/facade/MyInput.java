@@ -158,10 +158,10 @@ public interface MyInput {//the interface for the "Facade" class
 	// 	return -1;//TODO
 	// };
 	static int[] inputStartCoord(Board board) throws IOException{//looking for an valid Start Coord
-		return inputCoord("input Start Coord (row,col eg: 1,1)(0,0 to cancel):", board);
+		return inputCoord("input Start Coord (row,col eg: 1,1)(0 to cancel):", board);
 	};
 	static int[] inputDestinationCoord(Board board) throws IOException{//looking for an valid Destination Coord
-		return inputCoord("input Destination Coord (row,col eg, 1,1)(0,0 to cancel):", board);
+		return inputCoord("input Destination Coord (row,col eg, 1,1)(0 to cancel):", board);
 	};
 	static int[] inputCoord(String hint, ArrayList<int[]> validCoord) throws IOException{//looking for an valid Coord
 		System.out.println(hint);
@@ -172,7 +172,7 @@ public interface MyInput {//the interface for the "Facade" class
 		do {
 			str = br.readLine();
 			System.out.println(str);//debug
-			if(str=="0"){
+			if(str.charAt(0)=='0'){
 				return null;//cancel
 			}
 			tempCoord = str2coord(str);

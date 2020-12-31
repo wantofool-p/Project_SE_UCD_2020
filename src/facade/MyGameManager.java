@@ -202,16 +202,16 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		}
 	}
 	private boolean ifLose1(){// 1. If both Temples, Caves, Palaces, or Garden tiles, where the treasures can be collected, sink before the treasures are collected.
-		if((this.board.getStdTile(14).getStatus()==Status.SUNK)&&(this.board.getStdTile(15).getStatus()==Status.SUNK)&&!(((Palace) this.board.getStdTile(14)).getIfGet())){//Palace
+		if((this.board.getStdTile(14).getStatus()==Status.SUNK)&&(this.board.getStdTile(15).getStatus()==Status.SUNK)&&!(Palace.getIfGet())){//Palace
 			System.out.println("Both Palaces sink before the Chalice treasure is collected.");
 			return true;
-		} else if((this.board.getStdTile(10).getStatus()==Status.SUNK)&&(this.board.getStdTile(11).getStatus()==Status.SUNK)&&!(((Cave) this.board.getStdTile(10)).getIfGet())){//Cave
+		} else if((this.board.getStdTile(10).getStatus()==Status.SUNK)&&(this.board.getStdTile(11).getStatus()==Status.SUNK)&&!(Cave.getIfGet())){//Cave
 			System.out.println("Both Caves sink before the Fire treasure is collected.");
 			return true;
-		} else if((this.board.getStdTile(16).getStatus()==Status.SUNK)&&(this.board.getStdTile(17).getStatus()==Status.SUNK)&&!(((Temple) this.board.getStdTile(16)).getIfGet())){//Temple
+		} else if((this.board.getStdTile(16).getStatus()==Status.SUNK)&&(this.board.getStdTile(17).getStatus()==Status.SUNK)&&!(Temple.getIfGet())){//Temple
 			System.out.println("Both Temples sink before the Stone treasure is collected.");
 			return true;
-		} else if((this.board.getStdTile(12).getStatus()==Status.SUNK)&&(this.board.getStdTile(13).getStatus()==Status.SUNK)&&!(((Garden) this.board.getStdTile(12)).getIfGet())){//Garden
+		} else if((this.board.getStdTile(12).getStatus()==Status.SUNK)&&(this.board.getStdTile(13).getStatus()==Status.SUNK)&&!(Garden.getIfGet())){//Garden
 			System.out.println("Both Gardens sink before the Wind treasure is collected.");
 			return true;
 		} else {
@@ -305,10 +305,17 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				System.out.println("choose player(s)?");
 				HashSet<Integer> tempIntHashSet = MyInput.chooseMultiPlayer(("number for the player (1~" + this.board.getPlayerList().size()), this.board);
 				HashSet<StdRole> players = new HashSet<StdRole>();
-				for(int i:tempIntHashSet){
-					players.add(this.board.getPlayerList().get(i-1));
-				}
 				System.out.println("Player selected:");
+				for(int i:tempIntHashSet){
+					if(i==0){
+						return false;//cancel
+					} else if(i>this.board.getPlayerList().size()){
+						System.out.println("invalid input -- player index out of range");
+						return false;//invalid input
+					} else {
+						players.add(this.board.getPlayerList().get(i-1));
+					}
+				}
 				for(StdRole i:players){
 					System.out.println(i.getName());
 				}
@@ -347,10 +354,10 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	private boolean ifWin(){//assume the Helicopter lift card has been used
 		if(!this.ifLose2()){
 			if(this.board.getStdTile(18).getPlayers().size()==4){
-				if(((Palace) this.board.getStdTile(14)).getIfGet()){
-					if(((Cave) this.board.getStdTile(10)).getIfGet()){
-						if(((Temple) this.board.getStdTile(16)).getIfGet()){
-							if(((Garden) this.board.getStdTile(12)).getIfGet()){
+				if(Palace.getIfGet()){
+					if(Cave.getIfGet()){
+						if(Temple.getIfGet()){
+							if(Garden.getIfGet()){
 								return true;
 							}
 						}
@@ -464,7 +471,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	}
 	private void dropPlayerCard(StdRole currPlayer, int cardIndex, TreasureCard card){
 		this.usedTreasureDeck.pushCard(card);
-		currPlayer.dropTreasureCard(cardIndex);
+		currPlayer.removeTreasureCard(cardIndex);
 	}
 	public void takeAction() throws IOException{
 		while(this.currPlayer.getAP()>0){
@@ -482,7 +489,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				int tempChoose = MyInput.inputOneDigitNumber(("input index of operation (0~" + tempInt + "):"), 0, tempInt);
 				System.out.println("The player has been selected: " + this.selectedPlayer.getName());
 				System.out.println(this.feedbackOperationString[tempChoose]);
-				int tempChoose2, tempChoose3;
+				int tempChoose2=0, tempChoose3=0;
 				boolean tempFlag;
 				switch(tempChoose){
 					case 1://move
@@ -580,30 +587,44 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 									}
 									break;
 								case 3://give
-									if(hintFlag.get(2).get(0)){
+									if((hintFlag.get(2).get(0))&&(this.selectedPlayer.getClass()!=Messenger.class)){
 										System.out.println("No other player.");
 									} else if(hintFlag.get(2).get(1)){
 										System.out.println("No cards.");
 									} else {
+										ArrayList<StdRole> tempPlayerList;
+										if(this.selectedPlayer.getClass()==Messenger.class){
+											tempPlayerList = this.board.getPlayerList();
+										} else {
+											tempPlayerList = this.selectedPlayer.getCurrStdTile().getPlayers();
+										}
+										if(tempPlayerList.size()==2){
+											tempChoose3 = 3 - tempPlayerList.lastIndexOf(this.selectedPlayer);
+											System.out.println("Pass card to player -- " + tempPlayerList.get(tempChoose3).getName());
+										}
 										MyOutput.printCardListForDrop(this.selectedPlayer);
 										tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 										if(tempChoose2 == 0){
-											;
+											;//cancel
 										} else{
-											if(this.selectedPlayer.getCurrStdTile().getPlayers().size()==2){
-												tempChoose3 = 2;
+											if(tempPlayerList.size()==2){
+												;//there is only one player in range
 											} else {
-												MyOutput.printPlayerListForChoose(this.selectedPlayer.getCurrStdTile().getPlayers());
-												tempChoose3 = MyInput.inputOneDigitNumber(("input index for the player (0~" + this.selectedPlayer.getCurrStdTile().getPlayers().size() + "):"), 0, this.selectedPlayer.getCurrStdTile().getPlayers().size());
+												MyOutput.printPlayerListForChoose(tempPlayerList);
+												if(this.selectedPlayer.getClass()==CheatCharacter.class){
+													tempChoose3 = MyInput.inputOneNumber(("input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
+												} else {
+													tempChoose3 = MyInput.inputOneDigitNumber(("input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
+												}
 											}
 											if(tempChoose3 == 0){
-												;
-											} else if (this.selectedPlayer==this.selectedPlayer.getCurrStdTile().getPlayers().get(tempChoose3-1)){
+												;//cancel
+											} else if (this.selectedPlayer==tempPlayerList.get(tempChoose3-1)){
 												System.out.println("You passed a card to yourself without any AP cost.");
 											} else {
-												this.selectedPlayer.passCard(this.selectedPlayer.getCurrStdTile().getPlayers().get(tempChoose3-1), tempChoose2-1);
-												if(this.selectedPlayer.getCurrStdTile().getPlayers().get(tempChoose3-1).getCards().size()==6){//drop card
-													this.forceToChooseCardToDrop(this.selectedPlayer.getCurrStdTile().getPlayers().get(tempChoose3-1));
+												this.selectedPlayer.passCard(tempPlayerList.get(tempChoose3-1), tempChoose2-1);
+												if(tempPlayerList.get(tempChoose3-1).getCards().size()==6){//drop card
+													this.forceToChooseCardToDrop(tempPlayerList.get(tempChoose3-1));
 												}
 											}
 										}
@@ -617,10 +638,10 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 									} else if(hintFlag.get(3).get(2)){
 										System.out.println("No enough required treasure cards");
 									} else {
-										if(this.selectedPlayer.captureTreasure()){
+										if(this.selectedPlayer.captureTreasure(this.usedTreasureDeck)){
 											System.out.println("Capture...Success");
 										} else {
-											System.out.println("Capture...Failed -- This treasure has been captured already.");
+											System.out.println("Capture...Failed");
 										}
 									}
 									break;

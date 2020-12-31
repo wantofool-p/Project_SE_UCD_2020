@@ -80,7 +80,7 @@ public interface MyOutput {
 		if(selectedPlayer.getClass()==Explorer.class){
 			tempInt = 8;
 			for(int i=0; i<4; i++){
-				if(moveFlag.get(i)){
+				if(moveFlag.get(i+4)){
 					validDirection.add(diagonal[i]);
 				} else {
 					str[i+4].append(" [Not Allowed]");
@@ -119,7 +119,7 @@ public interface MyOutput {
 		if(selectedPlayer.getClass()==Explorer.class){
 			tempInt = 9;
 			for(int i=0; i<4; i++){
-				if(moveFlag.get(i)){
+				if(moveFlag.get(i+5)){
 					validDirection.add(diagonal[i]);
 				} else {
 					str[i+5].append(" [Not Allowed]");
@@ -314,18 +314,28 @@ public interface MyOutput {
 			if((selectedPlayer.getCurrStdTile().getClass() == Cave.class)&&(countFire<4)){
 				captureTreasureFlag.add(true);
 				System.out.print(" [No enough Fire card]");
-			}
-			if((selectedPlayer.getCurrStdTile().getClass() == Garden.class)&&(countWind<4)){
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Garden.class)&&(countWind<4)){
 				captureTreasureFlag.add(true);
 				System.out.print(" [No enough Wind card]");
-			}
-			if((selectedPlayer.getCurrStdTile().getClass() == Palace.class)&&(countChalice<4)){
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Palace.class)&&(countChalice<4)){
 				captureTreasureFlag.add(true);
 				System.out.print(" [No enough Chalice card]");
-			}
-			if((selectedPlayer.getCurrStdTile().getClass() == Temple.class)&&(countStore<4)){
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Temple.class)&&(countStore<4)){
 				captureTreasureFlag.add(true);
 				System.out.print(" [No enough Store card]");
+			} else {
+				captureTreasureFlag.add(false);
+			}
+			if((selectedPlayer.getCurrStdTile().getClass() == Cave.class)&&(Cave.getIfGet())){
+				System.out.print(" [The fire treasure has been taken]");
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Garden.class)&&(Garden.getIfGet())){
+				System.out.print(" [The wind treasure has been taken]");
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Palace.class)&&(Palace.getIfGet())){
+				System.out.print(" [The chalice treasure has been taken]");
+			} else if((selectedPlayer.getCurrStdTile().getClass() == Temple.class)&&(Temple.getIfGet())){
+				System.out.print(" [The store treasure has been taken]");
+			} else {
+				captureTreasureFlag.add(false);
 			}
 		} else {
 			captureTreasureFlag.add(true);

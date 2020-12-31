@@ -11,6 +11,7 @@ public class Diver extends StdRole{//Diver must end on a Tile (not SUNK)
 	public Diver(){
 		this.name="Diver";
 	}
+	@Override
 	public ArrayList<StdTile> end(Board board){
 		this.AP=0;
 		if(this.currStdTile.getStatus()==Status.SUNK){
@@ -24,6 +25,7 @@ public class Diver extends StdRole{//Diver must end on a Tile (not SUNK)
 			return null;
 		}
 	}
+	@Override
 	public boolean move(Board board, DirectionType directionType){
 		if(this.AP==0){
 			return false;//not enough AP
@@ -51,6 +53,7 @@ public class Diver extends StdRole{//Diver must end on a Tile (not SUNK)
 			}
 		}
 	}
+	@Override
 	public ArrayList<StdTile> sink(Board board){//return nearest valid StdTile List
 		int[] currCoord = this.currStdTile.getCoord();
 		int currRow=currCoord[0], currCol=currCoord[1];

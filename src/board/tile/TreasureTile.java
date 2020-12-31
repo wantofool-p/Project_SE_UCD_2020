@@ -10,6 +10,7 @@ public abstract class TreasureTile extends StdTile{
 	public TreasureTile(String name){
 		super(name);
 	}
+	@Override
 	public ArrayList<Integer> callTreasure(ArrayList<TreasureCard> cards){//this method would be called when player is trying to get a treasure //called by StdRole.java
 		ArrayList<Integer> temp = new ArrayList<Integer>();
 		for(int i=cards.size()-1; i>-1; i--){

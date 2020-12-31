@@ -83,9 +83,11 @@ public class StdTile implements Tile{
 		}
 	}
 	public ArrayList<Integer> callTreasure(ArrayList<TreasureCard> cards){//this method would be called when player is trying to get a treasure //called by StdRole.java
+		System.err.println("func callTreasure ERR -- class StdTile mistaken call");
 		return null;
 	}
 	public Treasure getTreasure(){
+		System.err.println("func getTreasure ERR -- class StdTile mistaken call");
 		return null;
 	}
 	public void printCLI(ArrayList<StringBuilder> lines1To5){

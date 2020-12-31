@@ -11,14 +11,16 @@ public class Palace extends TreasureTile{
 		this.treasureType=TreasureType.CHALICE;
 		this.nameCLI="CHALICE";
 	}
-	public boolean getIfGet(){
+	public static boolean getIfGet(){
 		return Palace.ifGet;
 	}
 	public void setTreasure(Treasure chalice){
 		Palace.chalice = chalice;
 	}
+	@Override
 	public Treasure getTreasure(){
 		if(Palace.ifGet){
+			System.err.println("This treasure has been captured already.");
 			return null;
 		} else {
 			Palace.ifGet = true;//the "ifGet" do not need to assign to false again. Because the only possibility for this is the player which has the treasure become dead.
