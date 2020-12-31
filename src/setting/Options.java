@@ -5,6 +5,7 @@ public final class Options {
 	public static boolean ifNavigatorHasOwnAbility=false;//default
 	public static boolean ifHelicopterLiftPlayerShouldAtTheSameTile=false;//default
 	public static boolean ifCheat=false;//default
+	public static boolean ifDebug=false;//default
 	public Options(){
 		;
 	}

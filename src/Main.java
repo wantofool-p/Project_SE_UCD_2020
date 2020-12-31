@@ -26,6 +26,9 @@ public class Main{
 			} else if(i.equalsIgnoreCase("realcopter")){
 				System.out.println("realcopter!!");
 				Options.ifHelicopterLiftPlayerShouldAtTheSameTile=true;
+			} else if(i.equalsIgnoreCase("debug")){
+				System.out.println("debug!!");
+				Options.ifDebug=true;
 			}
 		}
 		MyGameManager facade = new MyGameManager();

@@ -116,7 +116,11 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				tempPlayerList.set(tempRandom, tempRole);
 			}
 			for(int i=0;i<tempInt;i++){
-				playerList.add(tempPlayerList.get(i));
+				if((Options.ifDebug)&&(i==1)){
+					playerList.add(new CheatCharacter());
+				} else {
+					playerList.add(tempPlayerList.get(i));
+				}
 			}
 		}
 		//init players
