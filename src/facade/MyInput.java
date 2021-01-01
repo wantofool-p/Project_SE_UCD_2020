@@ -210,7 +210,7 @@ public interface MyInput {//the interface for the "Facade" class
 		do {
 			str = br.readLine();
 			System.out.println(str);//debug
-			if(str=="0"){
+			if(str.charAt(0)=='0'){
 				return null;//cancel
 			}
 			tempCoord = str2coord(str);

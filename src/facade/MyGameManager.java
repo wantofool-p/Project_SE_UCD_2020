@@ -599,8 +599,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											tempPlayerList = this.selectedPlayer.getCurrStdTile().getPlayers();
 										}
 										if(tempPlayerList.size()==2){
-											tempChoose3 = 3 - tempPlayerList.lastIndexOf(this.selectedPlayer);
-											System.out.println("Pass card to player -- " + tempPlayerList.get(tempChoose3).getName());
+											tempChoose3 = 1 - tempPlayerList.lastIndexOf(this.selectedPlayer) + 1;
+											System.out.println("Pass card to player -- " + tempPlayerList.get(tempChoose3-1).getName());
 										}
 										MyOutput.printCardListForDrop(this.selectedPlayer);
 										tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
