@@ -276,7 +276,7 @@ public abstract class StdRole{
 		}
 	}
 	protected void freePassCard(StdRole targetRole, int cardIndex){//assume a valid operation
-		targetRole.addTreasureCard(targetRole.getCards().get(cardIndex));
+		targetRole.addTreasureCard(this.getCards().get(cardIndex));
 		this.removeTreasureCard(cardIndex);
 	}
 	public boolean captureTreasure(TreasureDeck usedTreasureDeck){//assume a valid operation

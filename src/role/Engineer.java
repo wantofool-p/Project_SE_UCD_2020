@@ -1,6 +1,7 @@
 package role;
 
 import board.Board;
+import board.tile.Status;
 import board.tile.StdTile;
 
 public class Engineer extends StdRole{
@@ -22,12 +23,41 @@ public class Engineer extends StdRole{
 					case LEFT://←
 					case RIGHT://→
 					case MIDDLE://•
-						StdTile destination = getDestination(board, directionType1);
-						if(destination==null){
+						StdTile destination1 = getDestination(board, directionType1);
+						if(destination1==null){
 							return false;//failure
 						} else {
-							if(this.freeShoreUp(destination)){
-								break;
+							if(destination1.getStatus()==Status.FLOODED){
+								if(directionType2==null){
+									return false;//if any invalid input
+								} else {
+									switch (directionType2) {
+										case UP://↑
+										case DOWN://↓
+										case LEFT://←
+										case RIGHT://→
+										case MIDDLE://•
+											StdTile destination2 = getDestination(board, directionType2);
+											if(destination2==null){
+												return false;//failure
+											} else {
+												if(destination2.getStatus()==Status.FLOODED){
+													this.freeShoreUp(destination1);
+													this.freeShoreUp(destination2);
+													this.AP--;//true
+													return true;
+												} else {
+													return false;//failure
+												}
+											}
+										case TOPLEFT://↖//not allowed
+										case BOTTOMRIGHT://↘//not allowed
+										case BOTTOMLEFT://↙//not allowed
+										case TOPRIGHT://↗//not allowed
+										default://ERR
+											return false;//failure
+									}
+								}
 							} else {
 								return false;//failure
 							}
@@ -38,34 +68,6 @@ public class Engineer extends StdRole{
 					case TOPRIGHT://↗//not allowed
 					default://ERR
 						return false;//failure
-				}
-			}
-			if(directionType2==null){
-				return true;//success //it is allowed to store up ONE tile
-			} else {
-				switch (directionType2) {
-					case UP://↑
-					case DOWN://↓
-					case LEFT://←
-					case RIGHT://→
-					case MIDDLE://•
-						StdTile destination = getDestination(board, directionType2);
-						if(destination==null){
-							return false;//failure
-						} else {
-							if(this.freeShoreUp(destination)){
-								this.AP--;
-								return true;//success
-							} else {
-								return false;//failure
-							}
-						}
-					case TOPLEFT://↖//not allowed
-					case BOTTOMRIGHT://↘//not allowed
-					case BOTTOMLEFT://↙//not allowed
-					case TOPRIGHT://↗//not allowed
-					default://ERR
-						return false;//it is allowed to store up ONE tile
 				}
 			}
 		}
