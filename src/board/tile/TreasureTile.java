@@ -22,10 +22,10 @@ public abstract class TreasureTile extends StdTile{
 		for(int i=cards.size()-1; i>-1; i--){
 			if(cards.get(i).getTreasureType()==this.treasureType){
 				temp.add(i);
+				if(temp.size()==4){
+					return temp;
+				}
 			}
-		}
-		if(temp.size()>4){
-			temp.subList(0, 4);
 		}
 		return temp;
 	}
