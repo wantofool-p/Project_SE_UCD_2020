@@ -259,7 +259,9 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		} else {
 			StdTile tempTile = this.board.getStdTile(tempInt);
 			result = Sandbags.use(tempTile);
-			this.dropPlayerCard(player, cardIndex, card);
+			if(result){
+				this.dropPlayerCard(player, cardIndex, card);
+			}
 		}
 		return result;
 	}
@@ -283,6 +285,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						System.err.println("func useHelicopterLift ERR");
 						return false;//ERR
 					case 0:
+						System.out.println("This operation has been canceled by user");
 						return false;//cancel
 					case 1:
 					case 2:
@@ -291,6 +294,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						System.out.println("destination coordinate?");
 						int [] tempInt2 = MyInput.inputDestinationCoord(this.board);
 						if(tempInt2==null){
+							System.out.println("This operation has been canceled by user");
 							return false;//cancel
 						} else {
 							StdTile destination = this.board.getStdTile(tempInt2);
@@ -304,10 +308,15 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			} else {
 				System.out.println("choose player(s)?");
 				HashSet<Integer> tempIntHashSet = MyInput.chooseMultiPlayer(("number for the player (1~" + this.board.getPlayerList().size()), this.board);
+				if(tempIntHashSet==null){
+					System.out.println("This operation has been canceled by user");
+					return false;//cancel
+				}
 				HashSet<StdRole> players = new HashSet<StdRole>();
 				System.out.println("Player selected:");
 				for(int i:tempIntHashSet){
 					if(i==0){
+						System.out.println("This operation has been canceled by user");
 						return false;//cancel
 					} else if(i>this.board.getPlayerList().size()){
 						System.out.println("invalid input -- player index out of range");
@@ -326,6 +335,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				System.out.println("destination coordinate?");
 				int [] tempInt2 = MyInput.inputDestinationCoord(this.board);
 				if(tempInt2==null){
+					System.out.println("This operation has been canceled by user");
 					return false;//cancel
 				} else {
 					StdTile destination = this.board.getStdTile(tempInt2);
@@ -445,6 +455,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		MyOutput.printCardListForDrop(player);
 		int tempCardIndex = MyInput.inputOneDigitNumber(("input index of cards (1~" + player.getCards().size() + "):"), 0, player.getCards().size());
 		if(tempCardIndex==0){
+			System.out.println("This operation has been canceled by user");
 			return false; //cancel // usually this would be refuse
 		} else {
 			if(player.getCards().get(tempCardIndex-1).getClass()==HelicopterLift.class){
@@ -605,7 +616,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										MyOutput.printCardListForDrop(this.selectedPlayer);
 										tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 										if(tempChoose2 == 0){
-											;//cancel
+											System.out.println("This operation has been canceled by user");
 										} else{
 											if(tempPlayerList.size()==2){
 												;//there is only one player in range
@@ -618,7 +629,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 												}
 											}
 											if(tempChoose3 == 0){
-												;//cancel
+												System.out.println("This operation has been canceled by user");
 											} else if (this.selectedPlayer==tempPlayerList.get(tempChoose3-1)){
 												System.out.println("You passed a card to yourself without any AP cost.");
 											} else {
@@ -819,6 +830,9 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 													this.selectedPlayer.getCards().add(new Sandbags());
 												}
 												break;
+											case 0:
+												System.out.println("This operation has been canceled by user");
+												break;
 											default:
 												break;
 										}
@@ -850,7 +864,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 								tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 							}
 							if(tempChoose2==0){
-								;
+								System.out.println("This operation has been canceled by user");
 							} else if(selectedPlayer.getCards().get(tempChoose2-1).getClass()==HelicopterLift.class){
 								this.useHelicopterLift(selectedPlayer.getCards().get(tempChoose2-1), tempChoose2-1, this.selectedPlayer);
 							} else if(selectedPlayer.getCards().get(tempChoose2-1).getClass()==Sandbags.class){
@@ -865,6 +879,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						tempChoose2 = MyInput.inputOneDigitNumber(("input index for the player (0~" + this.board.getPlayerList().size() + "):"), 0, this.board.getPlayerList().size());
 						if(tempChoose2!=0){
 							this.selectedPlayer=board.getPlayerList().get(tempChoose2-1);
+						} else {
+							System.out.println("This operation has been canceled by user");
 						}
 						break;
 					case 0://end
@@ -876,6 +892,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 							tempChoose2 = MyInput.inputOneDigitNumber("Are you sure to end this turn? (0 or 1):", 0, 1);
 							if(tempChoose2==1){
 								this.selectedPlayer.end(board);
+							} else {
+								System.out.println("This operation has been canceled by user");
 							}
 						}
 						break;

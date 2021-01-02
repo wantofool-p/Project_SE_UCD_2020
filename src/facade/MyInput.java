@@ -24,15 +24,19 @@ public interface MyInput {//the interface for the "Facade" class
 			System.out.println(hint);
 			str = br.readLine();
 			System.out.println(str);//debug
-			for(int i=0; i<str.length(); i++){
-				temp = str.charAt(i)-48;
-				if(validNumList.contains(temp)){
-					result.add(temp);
-					flag = false;
+			if(str.length()==0){
+				System.out.println("invalid input");
+			} else {
+				for(int i=0; i<str.length(); i++){
+					temp = str.charAt(i)-48;
+					if(validNumList.contains(temp)){
+						result.add(temp);
+						flag = false;
+					}
 				}
-			}
-			if(flag){
-				System.out.println("not in list");
+				if(flag){
+					System.out.println("not in list");
+				}
 			}
 		} while (flag);
 		return result;
@@ -40,16 +44,20 @@ public interface MyInput {//the interface for the "Facade" class
 	static int inputOneDigitNumber(String hint, int minValidNum, int maxValidNum) throws IOException{//looking for an in-range number
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
-		int temp = 0;
+		int temp = -1;
 		boolean flag = true;
 		do {
 			System.out.println(hint);
 			str = br.readLine();
 			System.out.println(str);//debug
-			temp = str.charAt(0)-48;
-			flag = (temp<minValidNum)||(maxValidNum<temp);
-			if(flag){
-				System.out.println("not in range");
+			if(str.length()==0){
+				System.out.println("invalid input");
+			} else {
+				temp = str.charAt(0)-48;
+				flag = (temp<minValidNum)||(maxValidNum<temp);
+				if(flag){
+					System.out.println("not in range");
+				}
 			}
 		} while (flag);
 		return temp;
@@ -63,10 +71,14 @@ public interface MyInput {//the interface for the "Facade" class
 			System.out.println(hint);
 			str = br.readLine();
 			System.out.println(str);//debug
-			temp = str.charAt(0)-48;
-			flag = !validNumList.contains(temp);
-			if(flag){
-				System.out.println("not in list");
+			if(str.length()==0){
+				System.out.println("invalid input");
+			} else {
+				temp = str.charAt(0)-48;
+				flag = !validNumList.contains(temp);
+				if(flag){
+					System.out.println("not in list");
+				}
 			}
 		} while (flag);
 		return temp;
@@ -81,23 +93,31 @@ public interface MyInput {//the interface for the "Facade" class
 		while(loopFlag){
 			System.out.println(hint);
 			str = br.readLine();
-			tempSum=0;
-			for(int i=0; i<str.length(); i++){
-				tempChar = str.charAt(i);
-				if((48<=tempChar)&&(tempChar<=57)){
-					tempFlag = true;
-					tempSum*=10;
-					tempSum+=tempChar-48;
-				} else if(tempFlag){
-					break;
-				}
-			}
-			if(tempFlag==false){
-				System.out.println("not int");
-			} else if((tempSum<minValidNum)||(maxValidNum<tempSum)){
-				System.out.println("not in range");
+			if(str.length()==0){
+				System.out.println("invalid input");
 			} else {
-				loopFlag=false;
+				tempSum=0;
+				for(int i=0; i<str.length(); i++){
+					if(str.length()==0){
+						System.out.println("invalid input");
+					} else {
+						tempChar = str.charAt(i);
+						if((48<=tempChar)&&(tempChar<=57)){
+							tempFlag = true;
+							tempSum*=10;
+							tempSum+=tempChar-48;
+						} else if(tempFlag){
+							break;
+						}
+					}
+				}
+				if(tempFlag==false){
+					System.out.println("not int");
+				} else if((tempSum<minValidNum)||(maxValidNum<tempSum)){
+					System.out.println("not in range");
+				} else {
+					loopFlag=false;
+				}
 			}
 		}
 		return tempSum;
@@ -106,28 +126,31 @@ public interface MyInput {//the interface for the "Facade" class
 		System.out.println("choose multiple players, separate by comma (eg: 1,2)(0 to cancel)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
-		HashSet<Integer> tempIntHashSet;
+		HashSet<Integer> tempIntHashSet = null;
 		boolean flag = true;
 		do {
 			str = br.readLine();
 			System.out.println(str);//debug
-			if(str=="0"){
-				return null;//cancel
-			}
-			tempIntHashSet = str2intHashSet(str);
-			if(tempIntHashSet==null){
-				System.out.println("not valid input");
+			if(str.length()==0){
+				System.out.println("invalid input");
 			} else {
-				for(int i:tempIntHashSet){
-					if(i>board.getPlayerList().size()){
-						System.out.println("not valid player");
-						tempIntHashSet=null;
-						break;
+				tempIntHashSet = str2intHashSet(str);
+				if(tempIntHashSet==null){
+					System.out.println("not valid input");
+				} else {
+					for(int i:tempIntHashSet){
+						if(i>board.getPlayerList().size()){
+							System.out.println("not valid player");
+							tempIntHashSet=null;
+							break;
+						} else if(i==0){
+							return null;//cancel
+						}
 					}
 				}
-			}
-			if(tempIntHashSet!=null){
-				flag=false;
+				if(tempIntHashSet!=null){
+					flag=false;
+				}
 			}
 		} while (flag);
 		return tempIntHashSet;
@@ -175,27 +198,30 @@ public interface MyInput {//the interface for the "Facade" class
 		System.out.println(hint);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
-		int[] tempCoord;
+		int[] tempCoord = null;
 		boolean flag = true;
 		do {
 			str = br.readLine();
 			System.out.println(str);//debug
-			if(str.charAt(0)=='0'){
-				return null;//cancel
-			}
-			tempCoord = str2coord(str);
-			if(tempCoord==null){
-				System.out.println("not valid input");
-				continue;
-			}
-			for(int[] i: validCoord){
-				if((i[0]==tempCoord[0])&&(i[1]==tempCoord[1])){
-					flag=false;
-					break;
+			if(str.length()==0){
+				System.out.println("invalid input");
+			} else {
+				tempCoord = str2coord(str);
+				if(tempCoord==null){
+					System.out.println("not valid input");
+				} else if (tempCoord[1]==-1){
+					return null;//cancel
+				} else {
+					for(int[] i: validCoord){
+						if((i[0]==tempCoord[0])&&(i[1]==tempCoord[1])){
+							flag=false;
+							break;
+						}
+					}
+					if(flag){
+						System.out.println("not valid Coord");
+					}
 				}
-			}
-			if(flag){
-				System.out.println("not valid Coord");
 			}
 		} while (flag);
 		return tempCoord;
@@ -205,21 +231,24 @@ public interface MyInput {//the interface for the "Facade" class
 		System.out.println(hint);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
-		int[] tempCoord;
+		int[] tempCoord = null;
 		boolean flag = true;
 		do {
 			str = br.readLine();
 			System.out.println(str);//debug
-			if(str.charAt(0)=='0'){
-				return null;//cancel
-			}
-			tempCoord = str2coord(str);
-			if(tempCoord==null){
-				System.out.println("not valid input");
-			} else if(board.getStdTile(tempCoord)==null) {
-				System.out.println("not valid Coord");
+			if(str.length()==0){
+				System.out.println("invalid input");
 			} else {
-				flag=false;
+				tempCoord = str2coord(str);
+				if(tempCoord==null){
+					System.out.println("not valid input");
+				} else if (tempCoord[1]==-1){
+					return null;//cancel
+				} else if(board.getStdTile(tempCoord)==null) {
+					System.out.println("not valid Coord");
+				} else {
+					flag=false;
+				}
 			}
 		} while (flag);
 		return tempCoord;
@@ -257,10 +286,9 @@ public interface MyInput {//the interface for the "Facade" class
 				break;
 			}
 		}
-		if(flag==false){
-			return null;
+		if(flag){
+			result[1] = tempSum;
 		}
-		result[1] = tempSum;
 		return result;
 	}
 }
