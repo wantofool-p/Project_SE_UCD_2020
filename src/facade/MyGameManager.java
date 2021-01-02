@@ -772,10 +772,18 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 														} else {
 															tempCoord2=1;
 														}
-														for(;tempCoord2<36;tempCoord2+=2){
-															tempTile = this.board.getStdTile(tempCoord2/6, tempCoord2%6);
-															if(tempTile!=null){
-																tempTile.setStatus(Status.SUNK);
+														for(int j=0; j<6; j++){
+															int k;
+															if(j%2==0){
+																k=1-tempCoord2;
+															} else {
+																k=tempCoord2;
+															}
+															for(; k<6; k+=2){
+																tempTile = this.board.getStdTile(j, k);
+																if(tempTile!=null){
+																	tempTile.setStatus(Status.SUNK);
+																}
 															}
 														}
 														break;
