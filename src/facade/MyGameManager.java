@@ -363,7 +363,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	//You can take a Helicopter lift even if Fools’ landing is flooded.
 	private boolean ifWin(){//assume the Helicopter lift card has been used
 		if(!this.ifLose2()){
-			if(this.board.getStdTile(18).getPlayers().size()==4){
+			if(this.board.getStdTile(18).getPlayers().size()==this.board.getPlayerList().size()){
 				if(Palace.getIfGet()){
 					if(Cave.getIfGet()){
 						if(Temple.getIfGet()){
