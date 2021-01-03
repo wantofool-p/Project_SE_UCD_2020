@@ -459,12 +459,16 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			return false; //cancel // usually this would be refuse
 		} else {
 			if(player.getCards().get(tempCardIndex-1).getClass()==HelicopterLift.class){
-				if(this.useHelicopterLift(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
-					return true;
+				if(this.confirmToUseCard("Are you going to use this HelicopterLift card while dropping it? (0: cancel, 1:proceed)")){
+					if(this.useHelicopterLift(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
+						return true;
+					}
 				}
 			} else if(player.getCards().get(tempCardIndex-1).getClass()==Sandbags.class){
-				if(this.useSandbags(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
-					return true;
+				if(this.confirmToUseCard("Are you going to use this Sandbags card while dropping it? (0: cancel, 1:proceed)")){
+					if(this.useSandbags(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
+						return true;
+					}
 				}
 			} else {
 				dropPlayerCard(player, tempCardIndex-1);
@@ -472,6 +476,10 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			}
 		}
 		return false;
+	}
+	private boolean confirmToUseCard(String hint) throws IOException{
+		int tempInt = MyInput.inputOneDigitNumber(hint, 0, 1);
+		return (tempInt==1);
 	}
 	private void dropCard(TreasureCard card){//this method would NOT drop the card which is owned by the player!
 		this.usedTreasureDeck.pushCard(card);
@@ -489,6 +497,9 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			this.printCLI();
 			if(!this.ifLose()){
 				ArrayList<ArrayList<Boolean>> hintFlag = MyOutput.printMenu(board, this.selectedPlayer, this.currPlayer);
+				if((Palace.getIfGet())&&(Cave.getIfGet())&&(Temple.getIfGet())&&(Garden.getIfGet())){
+					System.out.println("[You get all treasures! Try to get all team members to the Fools' Landing and call a Helicopter!]");
+				}
 				int tempInt = 6;
 				if((selectedPlayer.getClass()==Pilot.class)||(selectedPlayer.getClass()==CheatCharacter.class)){
 					tempInt = 7;
