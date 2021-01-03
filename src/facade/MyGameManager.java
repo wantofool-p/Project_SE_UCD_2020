@@ -466,7 +466,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			return false; //cancel // usually this would be refuse
 		} else {
 			if(player.getCards().get(tempCardIndex-1).getClass()==HelicopterLift.class){
-				if(this.confirmToUseCard("Are you going to use this HelicopterLift card while dropping it? (0: cancel, 1:proceed)")){
+				if(this.confirmToUseCard("Are you going to use this HelicopterLift card while dropping it? (0: drop, 1:use)")){
 					if(this.useHelicopterLift(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
 						return true;
 					}
@@ -475,7 +475,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 					return true;
 				}
 			} else if(player.getCards().get(tempCardIndex-1).getClass()==Sandbags.class){
-				if(this.confirmToUseCard("Are you going to use this Sandbags card while dropping it? (0: cancel, 1:proceed)")){
+				if(this.confirmToUseCard("Are you going to use this Sandbags card while dropping it? (0: drop, 1:use)")){
 					if(this.useSandbags(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
 						return true;
 					}
