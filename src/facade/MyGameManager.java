@@ -545,7 +545,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										}
 									}
 									if(tempFlag){
-										System.out.println("[No valid tile nearby.]");
+										System.out.println("[No valid tile nearby.]");//invalid
 									} else {
 										MyOutput.printMoveMenu(this.board, hintFlag.get(0), this.selectedPlayer);
 										ArrayList<Integer> validNumList = new ArrayList<Integer>();
@@ -555,7 +555,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											}
 										}
 										validNumList.add(0);
-										StringBuilder hint = new StringBuilder("input index of operation (");
+										StringBuilder hint = new StringBuilder("Input index of operation (");
 										for(int i=0; i<validNumList.size(); i++){
 											hint.append(validNumList.get(i));
 											hint.append(" or ");
@@ -564,7 +564,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										hint.append("):");
 										tempChoose2 = MyInput.inputOneDigitNumber(hint.toString(), validNumList);
 										if(tempChoose2==0){
-											;
+											System.out.println("This operation has been canceled by user");//cancel
 										} else {
 											this.selectedPlayer.move(board, int2direction.get(tempChoose2));
 										}
@@ -579,7 +579,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										}
 									}
 									if(tempFlag){
-										System.out.println("[No flooded tile nearby.]");
+										System.out.println("[No flooded tile nearby.]");//invalid
 									} else {
 										MyOutput.printStoreUpMenu(this.board, hintFlag.get(1), this.selectedPlayer);
 										ArrayList<Integer> validNumList = new ArrayList<Integer>();
@@ -589,7 +589,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											}
 										}
 										validNumList.add(0);
-										StringBuilder hint = new StringBuilder("input index of operation (");
+										StringBuilder hint = new StringBuilder("Input index of operation (");
 										for(int i=0; i<validNumList.size(); i++){
 											hint.append(validNumList.get(i));
 											hint.append(" or ");
@@ -600,20 +600,20 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											System.out.println(" [Engineer] could input two different tile (eg. 2,4) or a single tile input (eg. 2):");
 											ArrayList<Integer> tempMultipleChoose = MyInput.inputMultipleOneDigitNumber(hint.toString(), validNumList);
 											if(tempMultipleChoose.get(0)==0){
-												;
+												System.out.println("This operation has been canceled by user");//cancel
 											} else if(tempMultipleChoose.size()==1){
 												this.selectedPlayer.shoreUp(board, int2direction.get(tempMultipleChoose.get(0)));
 											} else if((tempMultipleChoose.get(1)==0)){
-												;
+												System.out.println("This operation has been canceled by user");//cancel
 											} else if(tempMultipleChoose.get(0)==tempMultipleChoose.get(1)){
-												System.out.println("[Store up twice on a single tile is not allowed.]");
+												System.out.println("[Store up twice on a single tile is not allowed.]");//invalid
 											} else {
 												((Engineer) this.selectedPlayer).shoreUp(board, int2direction.get(tempMultipleChoose.get(0)), int2direction.get(tempMultipleChoose.get(1)));
 											}
 										} else {
 											tempChoose2 = MyInput.inputOneDigitNumber(hint.toString(), validNumList);
 											if(tempChoose2==0){
-												;
+												System.out.println("This operation has been canceled by user");//cancel
 											} else {
 												this.selectedPlayer.shoreUp(board, int2direction.get(tempChoose2));
 											}
@@ -637,7 +637,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											System.out.println("[Pass card to player -- " + tempPlayerList.get(tempChoose3-1).getName() + " ]");
 										}
 										MyOutput.printCardListForDrop(this.selectedPlayer);
-										tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
+										tempChoose2 = MyInput.inputOneDigitNumber(("Input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 										if(tempChoose2 == 0){
 											System.out.println("[This operation has been canceled by user]");
 										} else{
@@ -646,9 +646,9 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 											} else {
 												MyOutput.printPlayerListForChoose(tempPlayerList);
 												if(this.selectedPlayer.getClass()==CheatCharacter.class){
-													tempChoose3 = MyInput.inputOneNumber(("input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
+													tempChoose3 = MyInput.inputOneNumber(("Input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
 												} else {
-													tempChoose3 = MyInput.inputOneDigitNumber(("input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
+													tempChoose3 = MyInput.inputOneDigitNumber(("Input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
 												}
 											}
 											if(tempChoose3 == 0){
@@ -702,7 +702,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										System.out.println("19: add 10 HelicopterLift into your hand of cards");
 										System.out.println("20: add 10 SandBags into your hand of cards");
 										System.out.println("0: cancel");
-										tempChoose2 = MyInput.inputOneNumber(("input:"), 0, 20);
+										tempChoose2 = MyInput.inputOneNumber(("Input:"), 0, 20);
 										TreasureCard tempCard;
 										Treasure tempTreasure;
 										int guaranteedArea=0;
@@ -891,9 +891,9 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						} else {
 							MyOutput.printCardListForUse(this.selectedPlayer);
 							if(selectedPlayer.getClass()==CheatCharacter.class){
-								tempChoose2 = MyInput.inputOneNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
+								tempChoose2 = MyInput.inputOneNumber(("Input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 							} else {
-								tempChoose2 = MyInput.inputOneDigitNumber(("input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
+								tempChoose2 = MyInput.inputOneDigitNumber(("Input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 							}
 							if(tempChoose2==0){
 								System.out.println("[This operation has been canceled by user]");
