@@ -396,6 +396,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				treasureDeck.shuffle(this.usedTreasureDeck);
 			}
 		}
+		this.ifLose();
 	}
 	public void end() throws IOException{
 		for (int i=0; i<this.waterMeter.getLevel(); i++) {//applied flood card
@@ -404,9 +405,12 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			for(StdRole j: this.board.getPlayerList()){
 				tempNearestTile = j.end(this.board);//check if anyone sinks after a flood card has been applied
 				if(tempNearestTile!=null){
-					this.playerSink(j, tempNearestTile);
+					if(this.playerSink(j, tempNearestTile)){
+						System.out.println("team member sinks.");
+					}
 				}
 			}
+			this.ifLose();
 		}
 		if(this.currPlayerInt==board.getPlayerList().size()-1){//switch to the next player
 			this.currPlayerInt=0;
@@ -414,7 +418,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			this.currPlayerInt++;
 		}
 	}
-	private void playerSink(StdRole player, ArrayList<StdTile> nearestTile) throws IOException{
+	private boolean playerSink(StdRole player, ArrayList<StdTile> nearestTile) throws IOException{
 		boolean flag = true;
 		while(flag){
 			System.out.println(player.getName() + " sinks!!");
@@ -422,6 +426,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				System.out.println(player.getName() + " no place to swim!!");
 				player.setIsAlive(false);
 				System.out.println(player.getName() + " leave from us.");
+				//flag = false;
+				return false;
 			} else {
 				this.board.printWithCoordA(nearestTile);
 				System.out.println(player.getName() + " must swim to a tile");
@@ -439,6 +445,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			}
 		}
 		this.printCLI();
+		return true;
 	}
 	private void forceToChooseCardToDrop(StdRole player) throws IOException{
 		while(true){
