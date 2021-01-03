@@ -23,18 +23,18 @@ import treasure.TreasureType;
 
 public interface MyOutput {
 	static void printCardListForUse(StdRole selectedPlayer){
-		System.out.println("treasure cards in tot: " + selectedPlayer.getCards().size());
+		System.out.println("[Treasure cards in tot: " + selectedPlayer.getCards().size() + "]");
 		for(int i=0; i<selectedPlayer.getCards().size(); i++){
 			System.out.print((i+1) + ": " + selectedPlayer.getCards().get(i).getName());
 			if((selectedPlayer.getCards().get(i).getClass()!=HelicopterLift.class)&&(selectedPlayer.getCards().get(i).getClass()!=Sandbags.class)){
-				System.out.print(" [Not Allowed]");
+				System.out.print("[Not Allowed]");
 			}
 			System.out.println();
 		}
 		System.out.println("0: cancel");
 	}
 	static void printCardListForDrop(StdRole selectedPlayer){
-		System.out.println("treasure cards in tot: " + selectedPlayer.getCards().size());
+		System.out.println("[Treasure cards in tot: " + selectedPlayer.getCards().size() + "]");
 		for(int i=0; i<selectedPlayer.getCards().size(); i++){
 			System.out.println((i+1) + ": " + selectedPlayer.getCards().get(i).getName());
 		}
@@ -146,8 +146,8 @@ public interface MyOutput {
 	*/
 	static ArrayList<ArrayList<Boolean>> printMenu(Board board, StdRole selectedPlayer, StdRole currPlayer){
 		ArrayList<ArrayList<Boolean>> result = new ArrayList<ArrayList<Boolean>>();
-		System.out.println("This is "+ currPlayer.getName() + "'s turn:");
-		System.out.println("The player has been selected: " + selectedPlayer.getName() + "  AP:" + selectedPlayer.getAP());
+		System.out.println("[This is "+ currPlayer.getName() + "'s turn]");
+		System.out.println("[The player has been selected: " + selectedPlayer.getName() + "  AP:" + selectedPlayer.getAP() + "]");
 		boolean ifNoAP = selectedPlayer.getAP()<=0;
 		//move
 		result.add(printMove(board, selectedPlayer, ifNoAP));

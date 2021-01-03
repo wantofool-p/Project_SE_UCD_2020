@@ -64,20 +64,17 @@ public class StdTile implements Tile{
 	public boolean storeUp(){
 		if(this.status==Status.FLOODED){
 			this.status=Status.NORMAL;
-			System.out.println("storeUp success");
+			System.out.println("[Store Up success]");
 			return true;
 		} else {
 			if (this.status==Status.NORMAL){
-				System.err.println("this.status==Status.NORMAL");
-				System.err.println("storeUp failure");
+				System.err.println("[Store Up failure -- This tile is completely normal.]");
 				return false;
 			} else if(this.status==Status.SUNK){
-				System.err.println("this.status==Status.SUNK");
-				System.err.println("storeUp failure");
+				System.err.println("[Store Up failure -- This tile is already sunk.]");
 				return false;
 			} else {
-				System.err.println("this.status ERROR");
-				System.err.println("storeUp failure");
+				System.err.println("[Store Up failure -- this.status ERROR]");
 				return false;
 			}
 		}

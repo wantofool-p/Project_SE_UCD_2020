@@ -47,8 +47,8 @@ public class WaterMeter{
 		}
 	}
 	public void printCLI(){
-		System.out.println("Current Water Level = " + this.getLevel());
-		System.out.println("Current Water Meter = " + this.meter);
+		System.out.println("[Current Water Level = " + this.getLevel() + "]");
+		System.out.println("[Current Water Meter = " + this.meter + "]");
 	}
 	public void addMeter(){
 		this.meter++;

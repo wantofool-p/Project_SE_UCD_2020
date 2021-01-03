@@ -20,10 +20,10 @@ public class Garden extends TreasureTile{
 	@Override
 	public Treasure getTreasure(){
 		if(Garden.wind==null){
-			System.err.println("The wind treasure == null.");
+			System.err.println("[The wind treasure == null.]");
 			return null;
 		} else if(Garden.ifGet){
-			System.err.println("The wind treasure has been captured already.");
+			System.err.println("[The wind treasure has been captured already.]");
 			return null;
 		} else {
 			Garden.ifGet = true;//the "ifGet" do not need to assign to false again. Because the only possibility for this is the player which has the treasure become dead.

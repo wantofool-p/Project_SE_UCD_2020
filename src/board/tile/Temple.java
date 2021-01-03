@@ -20,10 +20,10 @@ public class Temple extends TreasureTile{
 	@Override
 	public Treasure getTreasure(){
 		if(Temple.stone==null){
-			System.err.println("The stone treasure == null.");
+			System.err.println("[The stone treasure == null.]");
 			return null;
 		} else if(Temple.ifGet){
-			System.err.println("The Stone treasure has been captured already.");
+			System.err.println("[The Stone treasure has been captured already.]");
 			return null;
 		} else {
 			Temple.ifGet = true;//the "ifGet" do not need to assign to false again. Because the only possibility for this is the player which has the treasure become dead.

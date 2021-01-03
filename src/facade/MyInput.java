@@ -25,7 +25,7 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				for(int i=0; i<str.length(); i++){
 					temp = str.charAt(i)-48;
@@ -35,7 +35,7 @@ public interface MyInput {//the interface for the "Facade" class
 					}
 				}
 				if(flag){
-					System.out.println("not in list");
+					System.out.println("[Not in list.]");
 				}
 			}
 		} while (flag);
@@ -51,12 +51,12 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				temp = str.charAt(0)-48;
 				flag = (temp<minValidNum)||(maxValidNum<temp);
 				if(flag){
-					System.out.println("not in range");
+					System.out.println("[Not in range.]");
 				}
 			}
 		} while (flag);
@@ -72,12 +72,12 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				temp = str.charAt(0)-48;
 				flag = !validNumList.contains(temp);
 				if(flag){
-					System.out.println("not in list");
+					System.out.println("[Not in list.]");
 				}
 			}
 		} while (flag);
@@ -94,12 +94,12 @@ public interface MyInput {//the interface for the "Facade" class
 			System.out.println(hint);
 			str = br.readLine();
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				tempSum=0;
 				for(int i=0; i<str.length(); i++){
 					if(str.length()==0){
-						System.out.println("invalid input");
+						System.out.println("[Invalid input.]");
 					} else {
 						tempChar = str.charAt(i);
 						if((48<=tempChar)&&(tempChar<=57)){
@@ -112,9 +112,9 @@ public interface MyInput {//the interface for the "Facade" class
 					}
 				}
 				if(tempFlag==false){
-					System.out.println("not int");
+					System.out.println("[Not int.]");
 				} else if((tempSum<minValidNum)||(maxValidNum<tempSum)){
-					System.out.println("not in range");
+					System.out.println("[Not in range.]");
 				} else {
 					loopFlag=false;
 				}
@@ -123,7 +123,7 @@ public interface MyInput {//the interface for the "Facade" class
 		return tempSum;
 	};
 	static HashSet<Integer> chooseMultiPlayer(String hint, Board board) throws IOException{//looking for an in-range number
-		System.out.println("choose multiple players, separate by comma (eg: 1,2)(0 to cancel)");
+		System.out.println("Choose multiple players, separate by comma (eg: 1,2)(0 to cancel)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str;
 		HashSet<Integer> tempIntHashSet = null;
@@ -132,15 +132,15 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				tempIntHashSet = str2intHashSet(str);
 				if(tempIntHashSet==null){
-					System.out.println("not valid input");
+					System.out.println("[Not valid input.]");
 				} else {
 					for(int i:tempIntHashSet){
 						if(i>board.getPlayerList().size()){
-							System.out.println("not valid player");
+							System.out.println("[Not valid player.]");
 							tempIntHashSet=null;
 							break;
 						} else if(i==0){
@@ -189,10 +189,10 @@ public interface MyInput {//the interface for the "Facade" class
 	// 	return -1;//TODO
 	// };
 	static int[] inputStartCoord(Board board) throws IOException{//looking for an valid Start Coord
-		return inputCoord("input Start Coord (row,col eg: 1,1)(0 to cancel):", board);
+		return inputCoord("Input Start Coord (row,col eg: 1,1)(0 to cancel):", board);
 	};
 	static int[] inputDestinationCoord(Board board) throws IOException{//looking for an valid Destination Coord
-		return inputCoord("input Destination Coord (row,col eg, 1,1)(0 to cancel):", board);
+		return inputCoord("Input Destination Coord (row,col eg, 1,1)(0 to cancel):", board);
 	};
 	static int[] inputCoord(String hint, ArrayList<int[]> validCoord) throws IOException{//looking for an valid Coord
 		System.out.println(hint);
@@ -204,11 +204,11 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				tempCoord = str2coord(str);
 				if(tempCoord==null){
-					System.out.println("not valid input");
+					System.out.println("[Not valid input.]");
 				} else if (tempCoord[1]==-1){
 					return null;//cancel
 				} else {
@@ -219,7 +219,7 @@ public interface MyInput {//the interface for the "Facade" class
 						}
 					}
 					if(flag){
-						System.out.println("not valid Coord");
+						System.out.println("[Not valid coordinate.]");
 					}
 				}
 			}
@@ -237,15 +237,15 @@ public interface MyInput {//the interface for the "Facade" class
 			str = br.readLine();
 			System.out.println(str);//debug
 			if(str.length()==0){
-				System.out.println("invalid input");
+				System.out.println("[Invalid input.]");
 			} else {
 				tempCoord = str2coord(str);
 				if(tempCoord==null){
-					System.out.println("not valid input");
+					System.out.println("[Not valid input.]");
 				} else if (tempCoord[1]==-1){
 					return null;//cancel
 				} else if(board.getStdTile(tempCoord)==null) {
-					System.out.println("not valid Coord");
+					System.out.println("[Not valid coordinate.]");
 				} else {
 					flag=false;
 				}
