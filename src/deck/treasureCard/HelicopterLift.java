@@ -14,9 +14,9 @@ public class HelicopterLift extends TreasureCard{
 	public static void use(HashSet<StdRole> players, StdTile startTile, StdTile destination){
 		if(Options.ifHelicopterLiftPlayerShouldAtTheSameTile){
 			for(StdRole i:startTile.getPlayers()){
-				startTile.playerLeaves(i);
 				destination.playerComes(i);
 			}
+			startTile.playerAllLeaves();
 		} else {
 			for(StdRole i:players){
 				i.getCurrStdTile().playerLeaves(i);

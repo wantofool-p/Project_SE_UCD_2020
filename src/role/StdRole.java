@@ -305,7 +305,7 @@ public abstract class StdRole{
 		}
 	}
 	public void printCLI(){
-		System.out.print(this.name + "  AP: " + this.AP);
+		System.out.print("[" + this.name + "  AP: " + this.AP + "]");
 		if(this.treasures.size()>0){
 			for(Treasure i: this.treasures){
 				System.out.print("  [Treasure ");

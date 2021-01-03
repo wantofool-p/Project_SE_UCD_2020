@@ -1,6 +1,7 @@
 package board;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import board.tile.Cave;
@@ -211,6 +212,17 @@ public class Board{
 		this.printWithCoordA(this.getAllNotSinkStdTile());
 	}
 	public void printWithCoordA(ArrayList<StdTile> tempTileList){
+		if(tempTileList==null){
+			System.err.println("func printCLIWithCoordA ERR");
+			return;
+		}
+		ArrayList<int[]> tempCoordList = new ArrayList<int[]>();
+		for(StdTile i:tempTileList){
+			tempCoordList.add(i.getCoord());
+		}
+		this.printWithCoordC(tempCoordList);
+	}
+	public void printWithCoordA(HashSet<StdTile> tempTileList){
 		if(tempTileList==null){
 			System.err.println("func printCLIWithCoordA ERR");
 			return;

@@ -265,7 +265,6 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		return result;
 	}
 	private boolean useHelicopterLift(TreasureCard card, int cardIndex, StdRole player) throws IOException{
-		int tempInt=-1;
 		System.out.println("[Use HelicopterLift]");
 		if(this.ifWin()){//if win
 			System.out.println("[Your team has captured all the treasures.]");
@@ -278,31 +277,22 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			MyOutput.printPlayerListForChoose(board);
 			if(Options.ifHelicopterLiftPlayerShouldAtTheSameTile){
 				System.out.println("Start at which player's tile?");
-				tempInt = MyInput.inputOneDigitNumber(("Index for the player (1~" + this.board.getPlayerList().size()), 0, this.board.getPlayerList().size());
-				switch (tempInt) {
-					case -1:
-						System.err.println("func useHelicopterLift ERR");
-						return false;//ERR
-					case 0:
+				int tempInt1 = MyInput.inputOneDigitNumber(("Index for the player (1~" + this.board.getPlayerList().size() + "):"), 0, this.board.getPlayerList().size());
+				if(tempInt1==0){
+					System.out.println("[This operation has been canceled by user.]");
+					return false;//cancel
+				} else {
+					System.out.println("Destination coordinate?");
+					int [] tempInt2 = MyInput.inputDestinationCoord(this.board);
+					if(tempInt2==null){
 						System.out.println("[This operation has been canceled by user.]");
 						return false;//cancel
-					case 1:
-					case 2:
-					case 3:
-					case 4:
-						System.out.println("Destination coordinate?");
-						int [] tempInt2 = MyInput.inputDestinationCoord(this.board);
-						if(tempInt2==null){
-							System.out.println("[This operation has been canceled by user.]");
-							return false;//cancel
-						} else {
-							StdTile destination = this.board.getStdTile(tempInt2);
-							HelicopterLift.use(null, this.board.getPlayerList().get(tempInt-1).getCurrStdTile(), destination);
-							this.dropPlayerCard(player, cardIndex, card);
-							return true;//success
-						}
-					default:
-						return false;//ERR
+					} else {
+						StdTile destination = this.board.getStdTile(tempInt2);
+						HelicopterLift.use(null, this.board.getStdTile(this.board.getPlayerList().get(tempInt1-1).getCoord()), destination);
+						this.dropPlayerCard(player, cardIndex, card);
+						return true;//success
+					}
 				}
 			} else {
 				System.out.println("Choose player(s):");
@@ -398,13 +388,14 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		this.ifLose();
 	}
 	public void end() throws IOException{
+		this.ifLose();
 		for (int i=0; i<this.waterMeter.getLevel(); i++) {//applied flood card
 			this.useFloodCard();
 			ArrayList<StdTile> tempNearestTile;
 			for(StdRole j: this.board.getPlayerList()){
 				tempNearestTile = j.end(this.board);//check if anyone sinks after a flood card has been applied
 				if(tempNearestTile!=null){
-					if(this.playerSink(j, tempNearestTile)){
+					if(this.playerSink(j, tempNearestTile)==false){
 						System.out.println("[Your team member sinks.]");
 					}
 				}
@@ -640,7 +631,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										tempChoose2 = MyInput.inputOneDigitNumber(("Input index for the card (0~" + this.selectedPlayer.getCards().size() + "):"), 0, this.selectedPlayer.getCards().size());
 										if(tempChoose2 == 0){
 											System.out.println("[This operation has been canceled by user]");
-										} else{
+										} else {
 											if(tempPlayerList.size()==2){
 												;//there is only one player in range
 											} else {
@@ -874,7 +865,35 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 										} else if(selectedPlayer.getClass()==Pilot.class){
 											this.useFlyAbility(this.selectedPlayer);
 										} else if(selectedPlayer.getClass()==Navigator.class){
-											;//TODO
+											ArrayList<StdRole> tempPlayerList = new ArrayList<StdRole>();
+											tempPlayerList.addAll(this.board.getPlayerList());
+											tempPlayerList.remove(selectedPlayer);
+											MyOutput.printPlayerListForChoose(tempPlayerList);
+											tempChoose2 = MyInput.inputOneDigitNumber(("Input index for the player (0~" + tempPlayerList.size() + "):"), 0, tempPlayerList.size());
+											if(tempChoose2 == 0){
+												System.out.println("[This operation has been canceled by user]");
+											} else {
+												HashSet<StdTile> tempValidTiles = new HashSet<StdTile>();
+												tempValidTiles = ((Navigator) selectedPlayer).getValidGuideDestination(this.board, tempPlayerList.get(tempChoose2-1));
+												if(tempValidTiles==null){
+													System.out.println("[Not allowed]");//not allowed
+												} else if(tempValidTiles.size()==0){
+													System.out.println("[No place to go]");//not allowed
+												} else {
+													this.board.printWithCoordA(tempValidTiles);
+													ArrayList<int[]> tempCoordList = new ArrayList<int[]>();
+													for(StdTile i: tempValidTiles){
+														tempCoordList.add(i.getCoord());
+													}
+													int [] chosenCoord = MyInput.inputCoord(("Choose a tile to guide:"), tempCoordList);
+													if(chosenCoord==null){
+														System.out.println("[Canceled]");//Cancel
+													} else {
+														tempPlayerList.get(tempChoose2-1).getCurrStdTile().playerLeaves(tempPlayerList.get(tempChoose2-1));
+														this.board.getStdTile(chosenCoord).playerComes(tempPlayerList.get(tempChoose2-1));
+													}
+												}
+											}
 										} else {
 											;//ERR
 										}

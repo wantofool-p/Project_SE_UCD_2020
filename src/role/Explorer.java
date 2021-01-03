@@ -13,7 +13,7 @@ public class Explorer extends StdRole{
 	@Override
 	public boolean move(Board board, DirectionType directionType){
 		if(this.AP==0){
-			return false;//not enough AP
+			return false;//no enough AP
 		} else {
 			switch (directionType) {
 				case UP://↑
@@ -43,7 +43,7 @@ public class Explorer extends StdRole{
 	@Override
 	public boolean shoreUp(Board board, DirectionType directionType){
 		if(this.AP==0){
-			return false;//not enough AP
+			return false;//no enough AP
 		} else {
 			switch (directionType) {
 				case UP://↑

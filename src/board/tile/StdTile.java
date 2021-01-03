@@ -181,4 +181,7 @@ public class StdTile implements Tile{
 		players.remove(player);
 		player.setCurrStdTile(null);
 	}
+	public void playerAllLeaves(){//assume a valid operation
+		players.clear();
+	}
 }
