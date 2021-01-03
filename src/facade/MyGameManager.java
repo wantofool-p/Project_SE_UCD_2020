@@ -463,12 +463,16 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 					if(this.useHelicopterLift(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
 						return true;
 					}
+				} else {
+					return true;
 				}
 			} else if(player.getCards().get(tempCardIndex-1).getClass()==Sandbags.class){
 				if(this.confirmToUseCard("Are you going to use this Sandbags card while dropping it? (0: cancel, 1:proceed)")){
 					if(this.useSandbags(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
 						return true;
 					}
+				} else {
+					return true;
 				}
 			} else {
 				dropPlayerCard(player, tempCardIndex-1);
