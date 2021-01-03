@@ -33,7 +33,6 @@ public class Main{
 		}
 		MyGameManager facade = new MyGameManager();
 		facade.init();
-		facade.printBoardWithAllCoordCLI();//DEBUG
 		while(true){
 			try {
 				facade.begin();//turns begins
