@@ -31,14 +31,14 @@ public interface MyOutput {
 			}
 			System.out.println();
 		}
-		System.out.println("0: cancel");
+		System.out.println("0: Cancel");
 	}
 	static void printCardListForDrop(StdRole selectedPlayer){
 		System.out.println("[Treasure cards in tot: " + selectedPlayer.getCards().size() + "]");
 		for(int i=0; i<selectedPlayer.getCards().size(); i++){
 			System.out.println((i+1) + ": " + selectedPlayer.getCards().get(i).getName());
 		}
-		System.out.println("0: cancel");
+		System.out.println("0: Cancel");
 	}
 	static void printPlayerListForChoose(Board board){
 		int j=1;
@@ -92,7 +92,7 @@ public interface MyOutput {
 		for(int i=0; i<tempInt; i++){
 			System.out.println(str[i]);
 		}
-		System.out.println("0: cancel");// TODO "5 or 0: cancel"
+		System.out.println("0: Cancel");// TODO "5 or 0: cancel"
 	}
 	static void printStoreUpMenu(Board board, ArrayList<Boolean> moveFlag, StdRole selectedPlayer){
 		DirectionType[] upDownLeftRightMiddle = {DirectionType.UP, DirectionType.DOWN, DirectionType.LEFT, DirectionType.RIGHT, DirectionType.MIDDLE};
@@ -160,7 +160,7 @@ public interface MyOutput {
 		//use functional card
 		result.add(printUseCard(board, selectedPlayer));
 		//switch the selected player
-		System.out.println("6: select another player");
+		System.out.println("6: Select another player");
 		//ability
 		result.add(printUseAbility(board, selectedPlayer, ifNoAP));
 		//end
@@ -169,7 +169,7 @@ public interface MyOutput {
 	}
 	static ArrayList<Boolean> printMove(Board board, StdRole selectedPlayer, boolean ifNoAP){
 		ArrayList<Boolean> moveFlag = new ArrayList<Boolean>();//↑↓←→↖↘↙↗
-		System.out.print("1: move");
+		System.out.print("1: Move");
 		if(ifNoAP){
 			System.out.print(" [No enough AP]");
 		}
@@ -216,7 +216,7 @@ public interface MyOutput {
 	}
 	static ArrayList<Boolean> printShoreUp(Board board, StdRole selectedPlayer, boolean ifNoAP){
 		ArrayList<Boolean> shoreUpFlag = new ArrayList<Boolean>();//↑↓←→•↖↘↙↗
-		System.out.print("2: shore up a flood tile");
+		System.out.print("2: Shore up a flood tile");
 		if(ifNoAP){
 			System.out.print(" [No enough AP]");
 		}
@@ -263,7 +263,7 @@ public interface MyOutput {
 	}
 	static ArrayList<Boolean> printPassCard(Board board, StdRole selectedPlayer, boolean ifNoAP){
 		ArrayList<Boolean> passCardFlag = new ArrayList<Boolean>();//[0]=if alone, [1]=if no card
-		System.out.print("3: pass a treasure card to another player");
+		System.out.print("3: Pass a treasure card to another player");
 		if(ifNoAP){
 			System.out.print(" [No enough AP]");
 		}
@@ -286,7 +286,7 @@ public interface MyOutput {
 	}
 	static ArrayList<Boolean> printCaptureTreasure(Board board, StdRole selectedPlayer, boolean ifNoAP){
 		ArrayList<Boolean> captureTreasureFlag = new ArrayList<Boolean>();//[0]=if no enough any same type treasure cards, [1]=if not at treasure tile, [2]=if no enough required treasure cards
-		System.out.print("4: capture the treasure if you can");
+		System.out.print("4: Capture the treasure if you can");
 		if(ifNoAP){
 			System.out.print(" [No enough AP]");
 		}
@@ -350,7 +350,7 @@ public interface MyOutput {
 	}
 	static ArrayList<Boolean> printUseCard(Board board, StdRole selectedPlayer){
 		ArrayList<Boolean> useCardFlag = new ArrayList<Boolean>();//[0]=if no functional card
-		System.out.print("5: use a functional treasure card");
+		System.out.print("5: Use a functional treasure card");
 		boolean tempFlag = true;
 		for(int i=0; i<selectedPlayer.getCards().size(); i++){
 			if((selectedPlayer.getCards().get(i).getClass()==HelicopterLift.class)||(selectedPlayer.getCards().get(i).getClass()==Sandbags.class)){
@@ -368,9 +368,9 @@ public interface MyOutput {
 	static ArrayList<Boolean> printUseAbility(Board board, StdRole selectedPlayer, boolean ifNoAP){
 		ArrayList<Boolean> useAbilityFlag = new ArrayList<Boolean>();//[0]=if ability is limited to use for now
 		if(selectedPlayer.getClass()==Pilot.class){
-			System.out.print("7: fly ability");
+			System.out.print("7: Fly ability");
 		} else if((selectedPlayer.getClass()==Navigator.class)&&(Options.ifNavigatorHasOwnAbility==true)){
-			System.out.print("7: guide ability");
+			System.out.print("7: Guide ability");
 		} else {
 			useAbilityFlag.add(false);
 			return useAbilityFlag;
@@ -394,9 +394,9 @@ public interface MyOutput {
 	static ArrayList<Boolean> printEnd(Board board, StdRole selectedPlayer, boolean ifNoAP, StdRole currPlayer){
 		ArrayList<Boolean> endFlag = new ArrayList<Boolean>();//[0] = if the selectedPlayer is not the currPlayer
 		if(ifNoAP){
-			System.out.print("0: end this turn");//end
+			System.out.print("0: End this turn");//end
 		} else {
-			System.out.print("0: drop all remaining APs to end this turn");//end
+			System.out.print("0: Drop all remaining APs to end this turn");//end
 		}
 		if(currPlayer!=selectedPlayer){
 			endFlag.add(true);
