@@ -471,6 +471,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						return true;
 					}
 				} else {
+					this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
 					return true;
 				}
 			} else if(player.getCards().get(tempCardIndex-1).getClass()==Sandbags.class){
@@ -479,10 +480,11 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 						return true;
 					}
 				} else {
+					this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
 					return true;
 				}
 			} else {
-				dropPlayerCard(player, tempCardIndex-1);
+				this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
 				return true;
 			}
 		}
@@ -495,10 +497,10 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	private void dropCard(TreasureCard card){//this method would NOT drop the card which is owned by the player!
 		this.usedTreasureDeck.pushCard(card);
 	}
-	private void dropPlayerCard(StdRole currPlayer, int cardIndex){
-		TreasureCard tempCard = currPlayer.getCards().get(cardIndex);
-		this.dropPlayerCard(currPlayer, cardIndex, tempCard);
-	}
+	// private void dropPlayerCard(StdRole currPlayer, int cardIndex){
+	// 	TreasureCard tempCard = currPlayer.getCards().get(cardIndex);
+	// 	this.dropPlayerCard(currPlayer, cardIndex, tempCard);
+	// }
 	private void dropPlayerCard(StdRole currPlayer, int cardIndex, TreasureCard card){
 		this.usedTreasureDeck.pushCard(card);
 		currPlayer.removeTreasureCard(cardIndex);
