@@ -7,4 +7,5 @@ public class WindCard extends TreasureCard{
 		this.name="Wind Card";
 		this.treasureType=TreasureType.WIND;
 	}
+
 }

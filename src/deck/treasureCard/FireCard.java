@@ -7,4 +7,5 @@ public class FireCard extends TreasureCard{
 		this.name="Fire Card";
 		this.treasureType=TreasureType.FIRE;
 	}
+
 }

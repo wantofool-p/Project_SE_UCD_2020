@@ -11,11 +11,17 @@ public class Garden extends TreasureTile{
 		this.treasureType=TreasureType.WIND;
 		this.nameCLI=" WIND  ";
 	}
+	public static Treasure getWind() {
+		return Garden.wind;
+	}
 	public static boolean getIfGet(){
 		return Garden.ifGet;
 	}
-	public void setTreasure(Treasure wind){
+	public static void setTreasure(Treasure wind){
 		Garden.wind = wind;
+	}
+	public static void setIfGet(boolean ifGet) {
+		Garden.ifGet = ifGet;
 	}
 	@Override
 	public Treasure getTreasure(){
@@ -30,4 +36,6 @@ public class Garden extends TreasureTile{
 			return Garden.wind;
 		}
 	}
+
+
 }

@@ -10,7 +10,10 @@ public class TreasureCard{
 		System.out.println(this.name);
 	}
 	public String getName(){//this method is debug only
-		return name;
+		return this.name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public TreasureType getTreasureType(){//this method is debug only
 		return treasureType;

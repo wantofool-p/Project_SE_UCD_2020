@@ -11,11 +11,17 @@ public class Cave extends TreasureTile{
 		this.treasureType=TreasureType.FIRE;
 		this.nameCLI=" FIRE  ";
 	}
+	public static Treasure getFire() {
+		return Cave.fire;
+	}
 	public static boolean getIfGet(){
 		return Cave.ifGet;
 	}
-	public void setTreasure(Treasure fire){
+	public static void setTreasure(Treasure fire){
 		Cave.fire = fire;
+	}
+	public static void setIfGet(boolean ifGet) {
+		Cave.ifGet = ifGet;
 	}
 	@Override
 	public Treasure getTreasure(){

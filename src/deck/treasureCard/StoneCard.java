@@ -7,4 +7,5 @@ public class StoneCard extends TreasureCard{
 		this.name="Stone Card";
 		this.treasureType=TreasureType.STONE;
 	}
+
 }

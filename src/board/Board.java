@@ -62,13 +62,13 @@ public class Board{
 	// Player ArrayList
 	protected ArrayList<StdRole> playerList = new ArrayList<StdRole>();
 	// Flag
-	private boolean ifInit = false;
+	public boolean ifInit = false;
 	public Board(){
 		this.initCoord();
-		this.tidalPalace.setTreasure(new Chalice());
-		this.caveOfShadows.setTreasure(new Fire());
-		this.templeOfTheMoon.setTreasure(new Stone());
-		this.whisperingGarden.setTreasure(new Wind());
+		Palace.setTreasure(new Chalice());
+		Cave.setTreasure(new Fire());
+		Temple.setTreasure(new Stone());
+		Garden.setTreasure(new Wind());
 	}
 	public ArrayList<StdRole> getPlayerList(){
 		return this.playerList;
@@ -84,7 +84,7 @@ public class Board{
 			this.ifInit=true;
 		}
 	}
-	private void rearrange(){
+	public void rearrange(){
 		ArrayList<Integer> tempList = new ArrayList<Integer>();
 		ArrayList<Integer> tempList2 = new ArrayList<Integer>();
 		for(int i=0;i<6*6;i++){
@@ -175,6 +175,16 @@ public class Board{
 	public int[] getCoord(StdTile tempTile){
 		return tempTile.getCoord();
 	}
+	public int getRow(StdTile tempTile) {
+		int[] temp=tempTile.getCoord();
+		return temp[0];
+		
+	}
+	public int getCol(StdTile tempTile) {
+		int[] temp=tempTile.getCoord();
+		return temp[1];
+		
+	}
 	public void printCLILite(){
 		ArrayList<StringBuilder> lines1To5 = new ArrayList<StringBuilder>();//should be 5 elements only
 		for (int i=0; i<5; i++) {
@@ -253,18 +263,16 @@ public class Board{
 		for (int i=0; i<5; i++) {
 			lines1To5.add(new StringBuilder(""));
 		}
-		// int[] tempCoord = {-1, -1};
+
 		for(int i=0;i<6;i++){
 			for(int j=0;j<6;j++){
 				this.tile[i][j].printCLI(lines1To5);
-				// tempCoord[0] = i; tempCoord[1] = j;
+
 				for(int[] k:tempCoordList){
 					if((k[0]==i)&&(k[1]==j))
 						lines1To5.get(0).replace(3+j*9, 6+j*9, (i + "," + j));
 				}
-				// if(tempCoordList.contains(tempCoord)){
-				// 	lines1To5.get(0).replace(3+j*9, 6+j*9, (i + "," + j));
-				// }
+
 			}
 			for(int j=0;j<5;j++){
 				System.out.println(lines1To5.get(j));
@@ -278,5 +286,11 @@ public class Board{
 		for(StdRole player: this.playerList){
 			player.printCLI();
 		}
+	}
+	public Tile[][] getTile() {
+		return tile;
+	}
+	public void setTile(Tile[][] tile) {
+		this.tile = tile;
 	}
 }

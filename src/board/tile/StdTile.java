@@ -127,10 +127,7 @@ public class StdTile implements Tile{
 			lines1To5.set(1, lines1To5.get(1).append(" "));//line 2
 			printCharacterCLI(lines1To5, 1, 3);
 			lines1To5.set(1, lines1To5.get(1).append(" "));//line 2
-			// lines1To5.set(2, lines1To5.get(2).append(" "));//line 3//old style
-			// printTileNameCLI(lines1To5);//old style
-			// lines1To5.set(2, lines1To5.get(2).append(" "));//line 3//old style
-			lines1To5.set(2, lines1To5.get(2).append("         "));//line 3//new style
+			lines1To5.set(2, lines1To5.get(2).append("         "));//line 3
 			lines1To5.set(3, lines1To5.get(3).append(" "));//line 4
 			printCharacterCLI(lines1To5, 3, 2);
 			lines1To5.set(3, lines1To5.get(3).append(" "));//line 4

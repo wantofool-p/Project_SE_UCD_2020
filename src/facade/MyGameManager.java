@@ -87,10 +87,26 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		//Each Player can have a role: Engineer, Explorer, Diver, Pilot, Messenger, Navigator.
 		int tempInt=0;
 		try {
-			tempInt = MyInput.inputOneDigitNumber("Input number of players (2~4):", 2, 4);
+			tempInt = MyInput.inputOneDigitNumber("input number of players (2~4):", 2, 4);
+			initRoles(tempInt);
+			initAssignCards();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Set the Water Meter
+		System.out.println("difficulty (1~4):");
+		System.out.println("1: waterMeter=1 Novice");
+		System.out.println("2: waterMeter=2 Normal");
+		System.out.println("3: waterMeter=3 Elite");
+		System.out.println("4: waterMeter=4 Legendary");
+		try {
+			tempInt = MyInput.inputOneDigitNumber("choose difficulty (1~4):", 1, 4);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.waterMeter.setWaterMeter(tempInt);
+	}
+	public void initRoles(int tempInt){
 		//init all roles
 		//Assign a role to each player:
 		//Randomly assign to each player one of the following roles: Explorer, Diver, Pilot, Engineer, Messenger and Navigator.
@@ -116,11 +132,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				tempPlayerList.set(tempRandom, tempRole);
 			}
 			for(int i=0;i<tempInt;i++){
-				if((Options.ifDebug)&&(i==1)){
-					playerList.add(new CheatCharacter());
-				} else {
-					playerList.add(tempPlayerList.get(i));
-				}
+				playerList.add(tempPlayerList.get(i));
 			}
 		}
 		//init players
@@ -160,6 +172,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			}
 		}
 		this.board.setPlayerList(playerList);
+	}
+	public void initAssignCards(){
 		//Hand Out Two Treasure Cards to Each player
 		//Hand Out Treasure Cards: Shuffle the Treasure Deck and assign 2 cards to each player.
 		//If anyone gets the Waters Rise cards, you should put it back in the Treasure Deck and assign another card.
@@ -176,19 +190,120 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		while(!usedTreasureDeck.isStackEmpty()){
 			treasureDeck.getStack().add(new Random().nextInt(treasureDeck.getStack().size()), usedTreasureDeck.popCard());
 		}
-		//Set the Water Meter
-		System.out.println("Difficulty (1~4):");
-		System.out.println("1: WaterMeter=1 Novice");
-		System.out.println("2: WaterMeter=2 Normal");
-		System.out.println("3: WaterMeter=3 Elite");
-		System.out.println("4: WaterMeter=4 Legendary");
-		try {
-			tempInt = MyInput.inputOneDigitNumber("Choose difficulty (1~4):", 1, 4);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		this.waterMeter.setWaterMeter(tempInt);
 	}
+//	public void init(){
+//		this.board.init();
+//		for (int i=0; i<6; i++) {
+//			this.useFloodCard();
+//		}
+//		//init player
+//		//Assign a role to each player
+//		//The number of players should range from 2 to 4.
+//		//Each Player can have a role: Engineer, Explorer, Diver, Pilot, Messenger, Navigator.
+//		int tempInt=0;
+//		try {
+//			tempInt = MyInput.inputOneDigitNumber("Input number of players (2~4):", 2, 4);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		//init all roles
+//		//Assign a role to each player:
+//		//Randomly assign to each player one of the following roles: Explorer, Diver, Pilot, Engineer, Messenger and Navigator.
+//		ArrayList<StdRole> playerList = new ArrayList<StdRole>();
+//		if(Options.ifCheat){
+//			for(int i=0;i<tempInt;i++){
+//				playerList.add(new CheatCharacter());
+//			}
+//		} else {
+//			ArrayList<StdRole> tempPlayerList = new ArrayList<StdRole>();
+//			tempPlayerList.add(new Diver());
+//			tempPlayerList.add(new Engineer());
+//			tempPlayerList.add(new Explorer());
+//			tempPlayerList.add(new Messenger());
+//			tempPlayerList.add(new Navigator());
+//			tempPlayerList.add(new Pilot());
+//			StdRole tempRole;
+//			int tempRandom;
+//			for(int i=0; i<tempPlayerList.size(); i++){//random
+//				tempRandom = new Random().nextInt(tempPlayerList.size());
+//				tempRole = tempPlayerList.get(i);
+//				tempPlayerList.set(i, tempPlayerList.get(tempRandom));
+//				tempPlayerList.set(tempRandom, tempRole);
+//			}
+//			for(int i=0;i<tempInt;i++){
+//				if((Options.ifDebug)&&(i==1)){
+//					playerList.add(new CheatCharacter());
+//				} else {
+//					playerList.add(tempPlayerList.get(i));
+//				}
+//			}
+//		}
+//		//init players
+//		//Depending on his/her role, a player’s pawn will be placed initially on a specific Island tile.
+//		//The Engineer will be placed on Bronze Gate,
+//		//the Explorer will be placed on Copper Gate,
+//		//the Diver will be placed on Iron Gate,
+//		//the Pilot will be placed on Fools’ Landing,
+//		//the Messenger will be placed on Silver Gate,
+//		//and the Navigator will be placed on Gold Gate.
+//		for(int i=0; i<playerList.size(); i++){
+//			@SuppressWarnings("rawtypes")
+//			Class tempClass=(playerList.get(i)).getClass();
+//			if (tempClass==CheatCharacter.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(10+2*i+new Random().nextInt(2)));
+//				board.getStdTile(10+2*i+new Random().nextInt(2)).playerComes(playerList.get(i));
+//			}else if(tempClass==Diver.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(20));
+//				board.getStdTile(20).playerComes(playerList.get(i));
+//			}else if(tempClass==Engineer.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(22));
+//				board.getStdTile(22).playerComes(playerList.get(i));
+//			}else if(tempClass==Explorer.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(23));
+//				board.getStdTile(23).playerComes(playerList.get(i));
+//			}else if(tempClass==Messenger.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(21));
+//				board.getStdTile(21).playerComes(playerList.get(i));
+//			}else if(tempClass==Navigator.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(19));
+//				board.getStdTile(19).playerComes(playerList.get(i));
+//			}else if(tempClass==Pilot.class){
+//				(playerList.get(i)).setCurrStdTile(board.getStdTile(18));
+//				board.getStdTile(18).playerComes(playerList.get(i));
+//			}else{
+//				System.err.println("init players ERROR");
+//			}
+//		}
+//		this.board.setPlayerList(playerList);
+//		//Hand Out Two Treasure Cards to Each player
+//		//Hand Out Treasure Cards: Shuffle the Treasure Deck and assign 2 cards to each player.
+//		//If anyone gets the Waters Rise cards, you should put it back in the Treasure Deck and assign another card.
+//		for(StdRole i: board.getPlayerList()){
+//			for(int j=0; j<2; j++){
+//				if(treasureDeck.getStack().peek().getClass()!=WaterRise.class){
+//					i.addTreasureCard(treasureDeck.popCard());
+//				} else {
+//					usedTreasureDeck.pushCard(treasureDeck.popCard());
+//					j--;
+//				}
+//			}
+//		}
+//		while(!usedTreasureDeck.isStackEmpty()){
+//			treasureDeck.getStack().add(new Random().nextInt(treasureDeck.getStack().size()), usedTreasureDeck.popCard());
+//		}
+//		//Set the Water Meter
+//		System.out.println("Difficulty (1~4):");
+//		System.out.println("1: WaterMeter=1 Novice");
+//		System.out.println("2: WaterMeter=2 Normal");
+//		System.out.println("3: WaterMeter=3 Elite");
+//		System.out.println("4: WaterMeter=4 Legendary");
+//		try {
+//			tempInt = MyInput.inputOneDigitNumber("Choose difficulty (1~4):", 1, 4);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		this.waterMeter.setWaterMeter(tempInt);
+//	}
 	private void useFloodCard(){
 		this.floodDeck.useCard(this.usedFloodDeck);
 	}
@@ -201,7 +316,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			return false;
 		}
 	}
-	private boolean ifLose1(){// 1. If both Temples, Caves, Palaces, or Garden tiles, where the treasures can be collected, sink before the treasures are collected.
+	public boolean ifLose1(){// 1. If both Temples, Caves, Palaces, or Garden tiles, where the treasures can be collected, sink before the treasures are collected.
 		if((this.board.getStdTile(14).getStatus()==Status.SUNK)&&(this.board.getStdTile(15).getStatus()==Status.SUNK)&&!(Palace.getIfGet())){//Palace
 			System.out.println("[Both Palaces sink before the Chalice treasure is collected.]");
 			return true;
@@ -218,7 +333,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			return false;
 		}
 	}
-	private boolean ifLose2(){// 2. If Fools’ Landing tile sinks.
+	public boolean ifLose2(){// 2. If Fools’ Landing tile sinks.
 		if(board.getStdTile(18).getStatus()==Status.SUNK){
 			System.out.println("[The Fools’ Landing tile sinks.]");
 			return true;
@@ -226,7 +341,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			return false;
 		}
 	}
-	private boolean ifLose3(){// 3. If any player is on an Island tile that sinks and cannot move to another tile.
+	public boolean ifLose3(){// 3. If any player is on an Island tile that sinks and cannot move to another tile.
 		for(StdRole player:this.board.getPlayerList()){
 			if(!player.getIsAlive()){
 				System.out.println("[The player " + player.getName() + " sinks.]");
@@ -235,7 +350,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		}
 		return false;
 	}
-	private boolean ifLose4(){// 4. If the water level reaches 5
+	public boolean ifLose4(){// 4. If the water level reaches 5
 		if((this.waterMeter.getLevel() == 6) || (this.waterMeter.getLevel() == -1)){
 			System.out.println("[The current water level reaches the skull and crossbones.]");
 			return true;
@@ -350,7 +465,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	//everyone must move their pawns to the Fools’ Landing tile.
 	//Then one player must discard a Helicopter lift card to lift the whole team off Fools’ Landing for the win.
 	//You can take a Helicopter lift even if Fools’ landing is flooded.
-	private boolean ifWin(){//assume the Helicopter lift card has been used
+	public boolean ifWin(){//assume the Helicopter lift card has been used
 		if(!this.ifLose2()){
 			if(this.board.getStdTile(18).getPlayers().size()==this.board.getPlayerList().size()){
 				if(Palace.getIfGet()){
@@ -376,13 +491,13 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			if(tempCard.getClass()==WaterRise.class){//water rise
 				this.useWaterRise(tempCard);
 			} else {
-				currPlayer.addTreasureCard(tempCard);
+				this.currPlayer.addTreasureCard(tempCard);
 			}
 			if(this.currPlayer.getCards().size()==6){//drop card
-				this.forceToChooseCardToDrop(currPlayer);
+				this.forceToChooseCardToDrop(this.currPlayer);
 			}
-			if(treasureDeck.isStackEmpty()){//check if a shuffle is needed
-				treasureDeck.shuffle(this.usedTreasureDeck);
+			if(this.treasureDeck.isStackEmpty()){//check if a shuffle is needed
+				this.treasureDeck.shuffle(this.usedTreasureDeck);
 			}
 		}
 		this.ifLose();
@@ -416,7 +531,6 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 				System.out.println("[ " + player.getName() + " no place to swim!!]");
 				player.setIsAlive(false);
 				System.out.println("[ " + player.getName() + " leave from us.]");
-				//flag = false;
 				return false;
 			} else {
 				this.board.printWithCoordA(nearestTile);
@@ -977,4 +1091,145 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 	public void printPlayersCLI(){
 		this.board.printPlayersCLI();
 	}
+	public Board getBoard() {
+		return this.board;
+	}
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+	public FloodDeck getFloodDeck() {
+		return this.floodDeck;
+	}
+	public void setFloodDeck(FloodDeck floodDeck) {
+		this.floodDeck = floodDeck;
+	}
+	public FloodDeck getUsedFloodDeck() {
+		return this.usedFloodDeck;
+	}
+	public void setUsedFloodDeck(FloodDeck usedFloodDeck) {
+		this.usedFloodDeck = usedFloodDeck;
+	}
+	public TreasureDeck getTreasureDeck() {
+		return this.treasureDeck;
+	}
+	public void setTreasureDeck(TreasureDeck treasureDeck) {
+		this.treasureDeck = treasureDeck;
+	}
+	public TreasureDeck getUsedTreasureDeck() {
+		return this.usedTreasureDeck;
+	}
+	public void setUsedTreasureDeck(TreasureDeck usedTreasureDeck) {
+		this.usedTreasureDeck = usedTreasureDeck;
+	}
+	public StdRole getSelectedPlayer() {
+		return this.selectedPlayer;
+	}
+	public void setSelectedPlayer(StdRole selectedPlayer) {
+		this.selectedPlayer = selectedPlayer;
+	}
+	public StdRole getCurrPlayer() {
+		return this.currPlayer;
+	}
+	public void setCurrPlayer(StdRole currPlayer) {
+		this.currPlayer = currPlayer;
+	}
+	public WaterMeter getWaterMeter() {
+		return this.waterMeter;
+	}
+	public void setWaterMeter(WaterMeter waterMeter) {
+		this.waterMeter = waterMeter;
+	}
+	//**********************************TEST METHOD**************************************************
+	public void initForTest(int temp1,int temp2){
+		this.board.init();
+		for (int i=0; i<6; i++) {
+			this.useFloodCard();
+		}
+		this.initRoles(temp1);
+		this.initAssignCards();
+		this.waterMeter.setWaterMeter(temp2);
+	}
+	//**************************************************************************************************
+	//******************************************TEST METHOD**************************************
+	public boolean useSandbagsForTest(TreasureCard card, int cardIndex, StdRole player, int[] tempInt){
+		boolean result;
+		if(tempInt==null){
+			result = false;
+		} else {
+			StdTile tempTile = this.board.getStdTile(tempInt);
+			result = Sandbags.use(tempTile);
+			if(result){
+				this.dropPlayerCard(player,cardIndex,card);
+				}
+		}
+		return result;
+	}
+	//*****************************************************************************************
+	//******************************************TEST METHOD**************************************
+	public boolean useHelicopterLiftByMultipleForTest(TreasureCard card, int cardIndex, StdRole player,HashSet<Integer> tempIntHashSet,int [] tempInt2){
+		if(this.ifWin()){//if win
+			return true;//return whatever //this is some kind of success
+		} else {
+			if(tempIntHashSet==null){
+				return false;//cancel
+			}
+			HashSet<StdRole> players = new HashSet<StdRole>();
+			for(int i:tempIntHashSet){
+				if(i==0){
+					return false;//cancel
+				} else if(i>this.board.getPlayerList().size()){
+					return false;//invalid input
+				} else {
+					players.add(this.board.getPlayerList().get(i-1));
+				}
+			}
+			for(StdRole i:players){
+				System.out.println(i.getName());
+			}
+			if(players.size()==0){
+				return false;//ERR
+			}
+			if(tempInt2==null){
+				return false;//cancel
+			} else {
+				StdTile destination = this.board.getStdTile(tempInt2);
+				HelicopterLift.use(players, null, destination);
+				this.dropPlayerCard(player, cardIndex, card);
+				return true;//success
+			}
+		}
+	}
+	//*****************************************************************************************
+	//**************************************TEST METHOD************************************
+	public void useWaterRiseTest(TreasureCard card){
+		this.useWaterRise(card);
+	}
+	//**********************************************************************************
+	//**************************************TEST METHOD************************************
+	public boolean UseCardWhileDrop(StdRole player, int tempCardIndex, int choice) throws IOException {
+		if(player.getCards().get(tempCardIndex-1).getClass()==HelicopterLift.class){
+			if(choice==1){
+				if(this.useHelicopterLift(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
+					return true;
+				}
+			} else {
+				this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
+				return true;
+			}
+		} else if(player.getCards().get(tempCardIndex-1).getClass()==Sandbags.class){
+			if(choice==1){
+				if(this.useSandbags(player.getCards().get(tempCardIndex-1), tempCardIndex-1, player)){
+					return true;
+				}
+			} else {
+				this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
+				return true;
+			}
+		} else {
+			this.dropPlayerCard(player, tempCardIndex-1, player.getCards().get(tempCardIndex-1));
+			return true;
+		}
+		return false;
+	}
+	//**********************************************************************************
 }

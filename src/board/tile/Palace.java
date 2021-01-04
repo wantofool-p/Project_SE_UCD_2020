@@ -11,11 +11,17 @@ public class Palace extends TreasureTile{
 		this.treasureType=TreasureType.CHALICE;
 		this.nameCLI="CHALICE";
 	}
+	public static Treasure getChalice() {
+		return Palace.chalice;
+	}
 	public static boolean getIfGet(){
 		return Palace.ifGet;
 	}
-	public void setTreasure(Treasure chalice){
+	public static void setTreasure(Treasure chalice){
 		Palace.chalice = chalice;
+	}
+	public static void setIfGet(boolean ifGet) {
+		Palace.ifGet = ifGet;
 	}
 	@Override
 	public Treasure getTreasure(){
