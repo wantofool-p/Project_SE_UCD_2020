@@ -438,12 +438,8 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		return true;
 	}
 	private void forceToChooseCardToDrop(StdRole player) throws IOException{
-		while(true){
-			if(this.chooseCardToDrop(player)){
-				return;
-			} else {
-				System.out.println("[You are be forced to drop a card, this operation can not be canceled.]");
-			}
+		while((this.chooseCardToDrop(player))==false){
+			System.out.println("[You are be forced to drop a card, this operation can not be canceled.]");
 		}
 	}
 	private boolean chooseCardToDrop(StdRole player) throws IOException{
@@ -452,7 +448,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		MyOutput.printCardListForDrop(player);
 		int tempCardIndex = MyInput.inputOneDigitNumber(("Input index of cards (1~" + player.getCards().size() + "):"), 0, player.getCards().size());
 		if(tempCardIndex==0){
-			System.out.println("This operation has been canceled by user");
+			System.out.println("[This operation has been canceled by user.]");
 			return false; //cancel // usually this would be refuse
 		} else {
 			if(player.getCards().get(tempCardIndex-1).getClass()==HelicopterLift.class){

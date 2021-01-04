@@ -12,6 +12,8 @@ public class FloodCard{
 	}
 	public void useCard(){
 		System.out.print(this.stdTile.getName());
+		int[] tempCoord = this.stdTile.getCoord();
+		System.out.print(" (" + tempCoord[0] + "," + tempCoord[1] + ")");
 		this.stdTile.flood();
 		if(this.stdTile.getStatus()==Status.FLOODED){//FLOODED, SUNK
 			System.out.println(" flood more...");
