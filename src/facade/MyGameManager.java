@@ -191,119 +191,6 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			treasureDeck.getStack().add(new Random().nextInt(treasureDeck.getStack().size()), usedTreasureDeck.popCard());
 		}
 	}
-//	public void init(){
-//		this.board.init();
-//		for (int i=0; i<6; i++) {
-//			this.useFloodCard();
-//		}
-//		//init player
-//		//Assign a role to each player
-//		//The number of players should range from 2 to 4.
-//		//Each Player can have a role: Engineer, Explorer, Diver, Pilot, Messenger, Navigator.
-//		int tempInt=0;
-//		try {
-//			tempInt = MyInput.inputOneDigitNumber("Input number of players (2~4):", 2, 4);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		//init all roles
-//		//Assign a role to each player:
-//		//Randomly assign to each player one of the following roles: Explorer, Diver, Pilot, Engineer, Messenger and Navigator.
-//		ArrayList<StdRole> playerList = new ArrayList<StdRole>();
-//		if(Options.ifCheat){
-//			for(int i=0;i<tempInt;i++){
-//				playerList.add(new CheatCharacter());
-//			}
-//		} else {
-//			ArrayList<StdRole> tempPlayerList = new ArrayList<StdRole>();
-//			tempPlayerList.add(new Diver());
-//			tempPlayerList.add(new Engineer());
-//			tempPlayerList.add(new Explorer());
-//			tempPlayerList.add(new Messenger());
-//			tempPlayerList.add(new Navigator());
-//			tempPlayerList.add(new Pilot());
-//			StdRole tempRole;
-//			int tempRandom;
-//			for(int i=0; i<tempPlayerList.size(); i++){//random
-//				tempRandom = new Random().nextInt(tempPlayerList.size());
-//				tempRole = tempPlayerList.get(i);
-//				tempPlayerList.set(i, tempPlayerList.get(tempRandom));
-//				tempPlayerList.set(tempRandom, tempRole);
-//			}
-//			for(int i=0;i<tempInt;i++){
-//				if((Options.ifDebug)&&(i==1)){
-//					playerList.add(new CheatCharacter());
-//				} else {
-//					playerList.add(tempPlayerList.get(i));
-//				}
-//			}
-//		}
-//		//init players
-//		//Depending on his/her role, a player’s pawn will be placed initially on a specific Island tile.
-//		//The Engineer will be placed on Bronze Gate,
-//		//the Explorer will be placed on Copper Gate,
-//		//the Diver will be placed on Iron Gate,
-//		//the Pilot will be placed on Fools’ Landing,
-//		//the Messenger will be placed on Silver Gate,
-//		//and the Navigator will be placed on Gold Gate.
-//		for(int i=0; i<playerList.size(); i++){
-//			@SuppressWarnings("rawtypes")
-//			Class tempClass=(playerList.get(i)).getClass();
-//			if (tempClass==CheatCharacter.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(10+2*i+new Random().nextInt(2)));
-//				board.getStdTile(10+2*i+new Random().nextInt(2)).playerComes(playerList.get(i));
-//			}else if(tempClass==Diver.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(20));
-//				board.getStdTile(20).playerComes(playerList.get(i));
-//			}else if(tempClass==Engineer.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(22));
-//				board.getStdTile(22).playerComes(playerList.get(i));
-//			}else if(tempClass==Explorer.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(23));
-//				board.getStdTile(23).playerComes(playerList.get(i));
-//			}else if(tempClass==Messenger.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(21));
-//				board.getStdTile(21).playerComes(playerList.get(i));
-//			}else if(tempClass==Navigator.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(19));
-//				board.getStdTile(19).playerComes(playerList.get(i));
-//			}else if(tempClass==Pilot.class){
-//				(playerList.get(i)).setCurrStdTile(board.getStdTile(18));
-//				board.getStdTile(18).playerComes(playerList.get(i));
-//			}else{
-//				System.err.println("init players ERROR");
-//			}
-//		}
-//		this.board.setPlayerList(playerList);
-//		//Hand Out Two Treasure Cards to Each player
-//		//Hand Out Treasure Cards: Shuffle the Treasure Deck and assign 2 cards to each player.
-//		//If anyone gets the Waters Rise cards, you should put it back in the Treasure Deck and assign another card.
-//		for(StdRole i: board.getPlayerList()){
-//			for(int j=0; j<2; j++){
-//				if(treasureDeck.getStack().peek().getClass()!=WaterRise.class){
-//					i.addTreasureCard(treasureDeck.popCard());
-//				} else {
-//					usedTreasureDeck.pushCard(treasureDeck.popCard());
-//					j--;
-//				}
-//			}
-//		}
-//		while(!usedTreasureDeck.isStackEmpty()){
-//			treasureDeck.getStack().add(new Random().nextInt(treasureDeck.getStack().size()), usedTreasureDeck.popCard());
-//		}
-//		//Set the Water Meter
-//		System.out.println("Difficulty (1~4):");
-//		System.out.println("1: WaterMeter=1 Novice");
-//		System.out.println("2: WaterMeter=2 Normal");
-//		System.out.println("3: WaterMeter=3 Elite");
-//		System.out.println("4: WaterMeter=4 Legendary");
-//		try {
-//			tempInt = MyInput.inputOneDigitNumber("Choose difficulty (1~4):", 1, 4);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		this.waterMeter.setWaterMeter(tempInt);
-//	}
 	private void useFloodCard(){
 		this.floodDeck.useCard(this.usedFloodDeck);
 	}
@@ -350,7 +237,7 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		}
 		return false;
 	}
-	public boolean ifLose4(){// 4. If the water level reaches 5
+	public boolean ifLose4(){// 4. If the water level reaches the skull and crossbones
 		if((this.waterMeter.getLevel() == 6) || (this.waterMeter.getLevel() == -1)){
 			System.out.println("[The current water level reaches the skull and crossbones.]");
 			return true;
