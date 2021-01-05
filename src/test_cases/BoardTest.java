@@ -24,7 +24,7 @@ public class BoardTest {
 	}
 	@Test
 	public void testRearrange() {//24 tiles in total, theoreticlly after shuffling the tile may be at the original place
-		                         //looking for a coordinate difference after shuffling
+		                         //looking for different coordinates after shuffling
 		int[] cr = new int[24];//rows
 		int[] cc = new int[24];//cols
 		for(int i=0; i<24; i++) {
