@@ -3,12 +3,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
-@SuiteClasses({ 
+@SuiteClasses({
 	DeckTest.class,
-    BoardTest.class, 
-    PlayerMovementTest.class,
-    PlayerTest.class,
-    MyGameManagerTest.class,
+	BoardTest.class,
+	PlayerMovementTest.class,
+	PlayerTest.class,
+	MyGameManagerTest.class,
 })
 public class AllTest{
 	;

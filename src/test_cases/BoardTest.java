@@ -9,22 +9,22 @@ import treasure.Stone;
 import treasure.Wind;
 public class BoardTest {
 	private Board testB;
-	 @Before
-	    public void setUp() throws Exception {//new board set up should be initialized
-	        testB = new Board();
-	        testB.init();
-	        assertTrue("New board set up should be initialized",testB.ifInit);
-	 }
+	@Before
+	public void setUp() throws Exception {//new board set up should be initialized
+		testB = new Board();
+		testB.init();
+		assertTrue("New board set up should be initialized",testB.ifInit);
+	}
 	@Test
 	public void testPlaceGetTreasure() {
-        assertTrue("TidalPalace should manage Ocean's Chalice", testB.getStdTile(14).getTreasure() instanceof Chalice); 
-        assertTrue("CaveOfShadows should manage the Crystal of the Fire", testB.getStdTile(10).getTreasure() instanceof Fire);
-        assertTrue("TempleOftheMoon should manage the Earth Stone ", testB.getStdTile(16).getTreasure() instanceof Stone);
-        assertTrue("Whispering Garden should manage the Statue of the Wind", testB.getStdTile(12).getTreasure() instanceof Wind);
+		assertTrue("TidalPalace should manage Ocean's Chalice", testB.getStdTile(14).getTreasure() instanceof Chalice);
+		assertTrue("CaveOfShadows should manage the Crystal of the Fire", testB.getStdTile(10).getTreasure() instanceof Fire);
+		assertTrue("TempleOftheMoon should manage the Earth Stone ", testB.getStdTile(16).getTreasure() instanceof Stone);
+		assertTrue("Whispering Garden should manage the Statue of the Wind", testB.getStdTile(12).getTreasure() instanceof Wind);
 	}
 	@Test
 	public void testRearrange() {//24 tiles in total, theoreticlly after shuffling the tile may be at the original place
-		                         //looking for different coordinates after shuffling
+								 //looking for different coordinates after shuffling
 		int[] cr = new int[24];//rows
 		int[] cc = new int[24];//cols
 		for(int i=0; i<24; i++) {
@@ -33,73 +33,73 @@ public class BoardTest {
 		}
 //		int c00r=(testB.getStdTile(0).getCoord())[0];
 //		int c00c=(testB.getStdTile(0).getCoord())[1];
-//		
+//
 //		int c01r=(testB.getStdTile(1).getCoord())[0];
 //		int c01c=(testB.getStdTile(1).getCoord())[1];
-//		
+//
 //		int c02r=(testB.getStdTile(2).getCoord())[0];
 //		int c02c=(testB.getStdTile(2).getCoord())[1];
-//		
+//
 //		int c03r=(testB.getStdTile(3).getCoord())[0];
 //		int c03c=(testB.getStdTile(3).getCoord())[1];
-//		
+//
 //		int c04r=(testB.getStdTile(4).getCoord())[0];
 //		int c04c=(testB.getStdTile(4).getCoord())[1];
-//		
+//
 //		int c05r=(testB.getStdTile(5).getCoord())[0];
 //		int c05c=(testB.getStdTile(5).getCoord())[1];
-//		
+//
 //		int c06r=(testB.getStdTile(6).getCoord())[0];
 //		int c06c=(testB.getStdTile(6).getCoord())[1];
-//		
+//
 //		int c07r=(testB.getStdTile(7).getCoord())[0];
 //		int c07c=(testB.getStdTile(7).getCoord())[1];
-//		
+//
 //		int c08r=(testB.getStdTile(8).getCoord())[0];
 //		int c08c=(testB.getStdTile(8).getCoord())[1];
-//		
+//
 //		int c09r=(testB.getStdTile(9).getCoord())[0];
 //		int c09c=(testB.getStdTile(9).getCoord())[1];
-//	
+//
 //		int c10r=(testB.getStdTile(10).getCoord())[0];
 //		int c10c=(testB.getStdTile(10).getCoord())[1];
-//		
+//
 //		int c11r=(testB.getStdTile(11).getCoord())[0];
 //		int c11c=(testB.getStdTile(11).getCoord())[1];
-//		
+//
 //		int c12r=(testB.getStdTile(12).getCoord())[0];
 //		int c12c=(testB.getStdTile(12).getCoord())[1];
-//		
+//
 //		int c13r=(testB.getStdTile(13).getCoord())[0];
 //		int c13c=(testB.getStdTile(13).getCoord())[1];
-//		
+//
 //		int c14r=(testB.getStdTile(14).getCoord())[0];
 //		int c14c=(testB.getStdTile(14).getCoord())[1];
-//		
+//
 //		int c15r=(testB.getStdTile(15).getCoord())[0];
 //		int c15c=(testB.getStdTile(15).getCoord())[1];
-//		
+//
 //		int c16r=(testB.getStdTile(16).getCoord())[0];
 //		int c16c=(testB.getStdTile(16).getCoord())[1];
-//		
+//
 //		int c17r=(testB.getStdTile(17).getCoord())[0];
 //		int c17c=(testB.getStdTile(17).getCoord())[1];
-//		
+//
 //		int c18r=(testB.getStdTile(18).getCoord())[0];
 //		int c18c=(testB.getStdTile(18).getCoord())[1];
-//		
+//
 //		int c19r=(testB.getStdTile(19).getCoord())[0];
 //		int c19c=(testB.getStdTile(19).getCoord())[1];
-//		
+//
 //		int c20r=(testB.getStdTile(20).getCoord())[0];
 //		int c20c=(testB.getStdTile(20).getCoord())[1];
-//		
+//
 //		int c21r=(testB.getStdTile(21).getCoord())[0];
 //		int c21c=(testB.getStdTile(21).getCoord())[1];
-//		
+//
 //		int c22r=(testB.getStdTile(22).getCoord())[0];
 //		int c22c=(testB.getStdTile(22).getCoord())[1];
-//		
+//
 //		int c23r=(testB.getStdTile(23).getCoord())[0];
 //		int c23c=(testB.getStdTile(23).getCoord())[1];
 		testB.rearrange();

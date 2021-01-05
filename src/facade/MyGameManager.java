@@ -369,40 +369,44 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 		return false;
 	}
 	public void begin() throws IOException{
+		this.ifLose();
 		this.currPlayer=board.getPlayerList().get(this.currPlayerInt);
 		this.selectedPlayer=board.getPlayerList().get(this.currPlayerInt);//set the selectedPlayer to the "curr player" as default
 		this.currPlayer.begin();//AP = 3
+	}
+	public void end() throws IOException{
 		TreasureCard tempCard;
-		for(int i=0; i<2; i++){//pick two treasure cards
+		for(int i=0; i<2; i++){//draw two treasure cards
 			tempCard = treasureDeck.popCard();
 			if(tempCard.getClass()==WaterRise.class){//water rise
 				this.useWaterRise(tempCard);
+				this.ifLose();
 			} else {
 				this.currPlayer.addTreasureCard(tempCard);
-			}
-			if(this.currPlayer.getCards().size()==6){//drop card
-				this.forceToChooseCardToDrop(this.currPlayer);
 			}
 			if(this.treasureDeck.isStackEmpty()){//check if a shuffle is needed
 				this.treasureDeck.shuffle(this.usedTreasureDeck);
 			}
 		}
-		this.ifLose();
-	}
-	public void end() throws IOException{
-		this.ifLose();
+		if(this.currPlayer.getCards().size()==7){//drop card
+			this.forceToChooseCardToDrop(this.currPlayer);
+		}
+		if(this.currPlayer.getCards().size()==6){//drop card
+			this.forceToChooseCardToDrop(this.currPlayer);
+		}
 		for (int i=0; i<this.waterMeter.getLevel(); i++) {//applied flood card
 			this.useFloodCard();
+			this.ifLose();
 			ArrayList<StdTile> tempNearestTile;
 			for(StdRole j: this.board.getPlayerList()){
 				tempNearestTile = j.end(this.board);//check if anyone sinks after a flood card has been applied
 				if(tempNearestTile!=null){
-					if(this.playerSink(j, tempNearestTile)==false){
+					if(this.playerSwim(j, tempNearestTile)==false){
 						System.out.println("[Your team member sinks.]");
+						this.ifLose();
 					}
 				}
 			}
-			this.ifLose();
 		}
 		if(this.currPlayerInt==board.getPlayerList().size()-1){//switch to the next player
 			this.currPlayerInt=0;
@@ -410,33 +414,37 @@ public class MyGameManager implements MyInput, MyOutput{//the interface for the 
 			this.currPlayerInt++;
 		}
 	}
-	private boolean playerSink(StdRole player, ArrayList<StdTile> nearestTile) throws IOException{
-		boolean flag = true;
-		while(flag){
-			System.out.println("[ " + player.getName() + " sinks!!]");
-			if(nearestTile.size()==0){
-				System.out.println("[ " + player.getName() + " no place to swim!!]");
-				player.setIsAlive(false);
-				System.out.println("[ " + player.getName() + " leave from us.]");
-				return false;
-			} else {
-				this.board.printWithCoordA(nearestTile);
-				System.out.println("[ " + player.getName() + " must swim to a tile]");
-				ArrayList<int[]> tempCoordList = new ArrayList<int[]>();
-				for(StdTile i: nearestTile){
-					tempCoordList.add(i.getCoord());
-				}
-				int [] chosenCoord;
-				chosenCoord = MyInput.inputCoord("Choose a tile to swim:", tempCoordList);
-				if(chosenCoord!=null){
-					flag=false;
-					player.getCurrStdTile().playerLeaves(player);
-					this.board.getStdTile(chosenCoord).playerComes(player);
+	private boolean playerSwim(StdRole player, ArrayList<StdTile> nearestTile) throws IOException{
+		if(player.getCurrStdTile().getStatus()==Status.SUNK){
+			boolean flag = true;
+			while(flag){
+				System.out.println("[ " + player.getName() + " sinks!!]");
+				if(nearestTile.size()==0){
+					System.out.println("[ " + player.getName() + " no place to swim!!]");
+					player.setIsAlive(false);
+					System.out.println("[ " + player.getName() + " leave from us.]");
+					return false;
+				} else {
+					this.board.printWithCoordA(nearestTile);
+					System.out.println("[ " + player.getName() + " must swim to a tile]");
+					ArrayList<int[]> tempCoordList = new ArrayList<int[]>();
+					for(StdTile i: nearestTile){
+						tempCoordList.add(i.getCoord());
+					}
+					int [] chosenCoord;
+					chosenCoord = MyInput.inputCoord("Choose a tile to swim:", tempCoordList);
+					if(chosenCoord!=null){
+						flag=false;
+						player.getCurrStdTile().playerLeaves(player);
+						this.board.getStdTile(chosenCoord).playerComes(player);
+					}
 				}
 			}
+			this.printCLI();
+			return true;
+		} else {
+			return true;//mistaken call
 		}
-		this.printCLI();
-		return true;
 	}
 	private void forceToChooseCardToDrop(StdRole player) throws IOException{
 		while((this.chooseCardToDrop(player))==false){

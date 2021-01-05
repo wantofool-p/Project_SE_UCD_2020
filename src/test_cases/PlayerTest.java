@@ -17,35 +17,35 @@ import role.Messenger;
 import role.Navigator;
 import treasure.Fire;
 public class PlayerTest {
-    private Board testB=new Board();
-    /**For Diver at SUNK cliffsOfAbandon, when use ability, end() method should return 5 nearest Tiles
-     * {NullTile,         		 NullTile,         		              twilightHollow,          tidalPalace,     NullTile,      NullTile},
-		{NullTile,         		 breakersBridge(SUNK),                bronzeGate(nearest),     caveOfEmbers,    caveOfShadows, NullTile},
-		{whisperingGarden(SUNK), cliffsOfAbandon(SUNK,Diver here),    copperGate(SUNK),        coralPalace(nearest),     crimsonForest,  phantomRock},
-		{watchtower(nearest),    dunesOfDeception(SUNK),              foolsLanding(nearest),   goldGate,        howlingGarden, silverGate},
-		{NullTile,               observatory(nearest),                mistyMarsh,              lostLagoon,      ironGate,      NullTile},
-		{NullTile,               NullTile,                            templeOfTheSun,           templeOfTheMoon, NullTile,      NullTile},
-     */
+	private Board testB=new Board();
+	/**For Diver at SUNK cliffsOfAbandon, when use ability, end() method should return 5 nearest Tiles
+	*   {NullTile,               NullTile,                         twilightHollow,        tidalPalace,          NullTile,      NullTile},
+		{NullTile,               breakersBridge(SUNK),             bronzeGate(nearest),   caveOfEmbers,         caveOfShadows, NullTile},
+		{whisperingGarden(SUNK), cliffsOfAbandon(SUNK,Diver here), copperGate(SUNK),      coralPalace(nearest), crimsonForest, phantomRock},
+		{watchtower(nearest),    dunesOfDeception(SUNK),           foolsLanding(nearest), goldGate,             howlingGarden, silverGate},
+		{NullTile,               observatory(nearest),             mistyMarsh,            lostLagoon,           ironGate,      NullTile},
+		{NullTile,               NullTile,                         templeOfTheSun,        templeOfTheMoon,      NullTile,      NullTile},
+	*/
 	@Test
 	public void testDiverEnd() {
-		 Diver testPlayerD=new Diver();
-		 testB.getStdTile(1,1).setStatus(Status.SUNK);
-		 testB.getStdTile(2,0).setStatus(Status.SUNK);
-		 testB.getStdTile(2,1).setStatus(Status.SUNK);
-		 testB.getStdTile(2,2).setStatus(Status.SUNK);
-		 testB.getStdTile(3,1).setStatus(Status.SUNK);
-		 testPlayerD.setCurrStdTile(testB.getStdTile(2, 1));
-		 assertEquals("Should find 5 nearest tiles",5,testPlayerD.end(testB).size());
+		Diver testPlayerD=new Diver();
+		testB.getStdTile(1,1).setStatus(Status.SUNK);
+		testB.getStdTile(2,0).setStatus(Status.SUNK);
+		testB.getStdTile(2,1).setStatus(Status.SUNK);
+		testB.getStdTile(2,2).setStatus(Status.SUNK);
+		testB.getStdTile(3,1).setStatus(Status.SUNK);
+		testPlayerD.setCurrStdTile(testB.getStdTile(2, 1));
+		assertEquals("Should find 5 nearest tiles",5,testPlayerD.end(testB).size());
 	}
 	/**For Engineer at cliffsOfAbandon, when use ability, shoreup() method successfully makes dunesOfDeception, return NORMAL,
-	 * SUNK copperGate keep still, finally AP becomes 0 given 1
-     * {NullTile,         		 NullTile,         		            twilightHollow,                    tidalPalace,     NullTile,      NullTile},
-		{NullTile,         		 breakersBridge,                    bronzeGate,                        caveOfEmbers,    caveOfShadows, NullTile},
-		{whisperingGarden,       cliffsOfAbandon(Engineer here),    copperGate(SUNK 1st,FLOODED 2rd),  coralPalace,     crimsonForest,  phantomRock},
-		{watchtower,             dunesOfDeception(FLOODED),         foolsLanding,                      goldGate,        howlingGarden, silverGate},
-		{NullTile,               observatory,                       mistyMarsh,                        lostLagoon,      ironGate,      NullTile},
-		{NullTile,               NullTile,                          templeOfTheSun,                    templeOfTheMoon, NullTile,      NullTile},
-     */
+	* SUNK copperGate keep still, finally AP becomes 0 given 1
+	*   {NullTile,         NullTile,                       twilightHollow,                   tidalPalace,     NullTile,      NullTile},
+		{NullTile,         breakersBridge,                 bronzeGate,                       caveOfEmbers,    caveOfShadows, NullTile},
+		{whisperingGarden, cliffsOfAbandon(Engineer here), copperGate(SUNK 1st,FLOODED 2rd), coralPalace,     crimsonForest, phantomRock},
+		{watchtower,       dunesOfDeception(FLOODED),      foolsLanding,                     goldGate,        howlingGarden, silverGate},
+		{NullTile,         observatory,                    mistyMarsh,                       lostLagoon,      ironGate,      NullTile},
+		{NullTile,         NullTile,                       templeOfTheSun,                   templeOfTheMoon, NullTile,      NullTile},
+	*/
 	@Test
 	public void testEngineerShoreUp() {
 		Engineer testPlayerE=new Engineer();
@@ -53,22 +53,22 @@ public class PlayerTest {
 		testPlayerE.setCurrStdTile(testB.getStdTile(2, 1));
 		testB.getStdTile(2,2).setStatus(Status.SUNK);//SUNK test 1st
 		testB.getStdTile(3,1).setStatus(Status.FLOODED);
-        assertEquals("Once the asked shore up is relevant to a SUNK tile, shoreUp should NOT work",false,testPlayerE.shoreUp(testB,DirectionType.DOWN,DirectionType.RIGHT));
-        testB.getStdTile(2,2).setStatus(Status.FLOODED);//FLOODED TEST 2RD
-        testPlayerE.shoreUp(testB,DirectionType.DOWN,DirectionType.RIGHT);//call again
+		assertEquals("Once the asked shore up is relevant to a SUNK tile, shoreUp should NOT work",false,testPlayerE.shoreUp(testB,DirectionType.DOWN,DirectionType.RIGHT));
+		testB.getStdTile(2,2).setStatus(Status.FLOODED);//FLOODED TEST 2RD
+		testPlayerE.shoreUp(testB,DirectionType.DOWN,DirectionType.RIGHT);//call again
 		assertEquals("FLOODED copperGate should return NORMAL",Status.NORMAL,testB.getStdTile(2,2).getStatus());
 		assertEquals("FLOODED dunesOfDeception should return NORMAL",Status.NORMAL,testB.getStdTile(3,1).getStatus());
 		assertEquals("AP should run out",0,testPlayerE.getAP());
 	}
 	/**For Messenger at different tile with another player, can still give card directly by passCard() method
-	 * {NullTile,         		 NullTile,         		            twilightHollow,                   tidalPalace,     NullTile,      NullTile},
-		{NullTile,         		 breakersBridge,                    bronzeGate,                       caveOfEmbers,    caveOfShadows, NullTile},
-		{whisperingGarden,       cliffsOfAbandon(Messenger here),    copperGate(Navigator here),       coralPalace,     crimsonForest,  phantomRock},
-		{watchtower,             dunesOfDeception,                  foolsLanding,                     goldGate,         howlingGarden, silverGate},
-		{NullTile,               observatory,                       mistyMarsh,                       lostLagoon,      ironGate,      NullTile},
-		{NullTile,               NullTile,                          templeOfTheSun,                   templeOfTheMoon, NullTile,      NullTile},
-	 * 
-	 */
+	*   {NullTile,         NullTile,                        twilightHollow,             tidalPalace,     NullTile,      NullTile},
+		{NullTile,         breakersBridge,                  bronzeGate,                 caveOfEmbers,    caveOfShadows, NullTile},
+		{whisperingGarden, cliffsOfAbandon(Messenger here), copperGate(Navigator here), coralPalace,     crimsonForest, phantomRock},
+		{watchtower,       dunesOfDeception,                foolsLanding,               goldGate,        howlingGarden, silverGate},
+		{NullTile,         observatory,                     mistyMarsh,                 lostLagoon,      ironGate,      NullTile},
+		{NullTile,         NullTile,                        templeOfTheSun,             templeOfTheMoon, NullTile,      NullTile},
+	*
+	*/
 	@Test
 	public void testMessengerPassCard() {
 		Messenger testPlayerM=new Messenger();
@@ -91,23 +91,23 @@ public class PlayerTest {
 	//About Pilot and Explorer, their special ability of movement has been tested in PlayerMovementTest
 	//About Navigator, since the ability is not required, here not plan to test
 	/**Here another special point is, Explorer's nearest tile judgement is different from others since he can move diagonally
-	 * {NullTile,         		 NullTile,         		              twilightHollow,          tidalPalace,     NullTile,      NullTile},
-		{NullTile,         		 breakersBridge(SUNK),                bronzeGate(nearest),     caveOfEmbers,    caveOfShadows, NullTile},
-		{whisperingGarden(SUNK), cliffsOfAbandon(SUNK,Explorer here), copperGate(SUNK),        coralPalace,     crimsonForest,  phantomRock},
-		{watchtower(nearest),    dunesOfDeception(SUNK),              foolsLanding(nearest),   goldGate,        howlingGarden, silverGate},
-		{NullTile,               observatory,                         mistyMarsh,              lostLagoon,      ironGate,      NullTile},
-		{NullTile,               NullTile,                            templeOfTheSun,           templeOfTheMoon, NullTile,      NullTile},
-	 */
+	*   {NullTile,               NullTile,                            twilightHollow,        tidalPalace,      NullTile,      NullTile},
+		{NullTile,               breakersBridge(SUNK),                bronzeGate(nearest),   caveOfEmbers,     caveOfShadows, NullTile},
+		{whisperingGarden(SUNK), cliffsOfAbandon(SUNK,Explorer here), copperGate(SUNK),      coralPalace,      crimsonForest, phantomRock},
+		{watchtower(nearest),    dunesOfDeception(SUNK),              foolsLanding(nearest), goldGate,         howlingGarden, silverGate},
+		{NullTile,               observatory,                         mistyMarsh,            lostLagoon,       ironGate,      NullTile},
+		{NullTile,               NullTile,                            templeOfTheSun,         templeOfTheMoon, NullTile,      NullTile},
+	*/
 	@Test
 	public void testExplorerSink() {
-		 Explorer testPlayerE=new Explorer();
-		 testB.getStdTile(1,1).setStatus(Status.SUNK);
-		 testB.getStdTile(2,0).setStatus(Status.SUNK);
-		 testB.getStdTile(2,1).setStatus(Status.SUNK);
-		 testB.getStdTile(2,2).setStatus(Status.SUNK);
-		 testB.getStdTile(3,1).setStatus(Status.SUNK);
-		 testPlayerE.setCurrStdTile(testB.getStdTile(2, 1));
-		 assertEquals("Should find 3 nearest tiles",3,testPlayerE.sink(testB).size());
+		Explorer testPlayerE=new Explorer();
+		testB.getStdTile(1,1).setStatus(Status.SUNK);
+		testB.getStdTile(2,0).setStatus(Status.SUNK);
+		testB.getStdTile(2,1).setStatus(Status.SUNK);
+		testB.getStdTile(2,2).setStatus(Status.SUNK);
+		testB.getStdTile(3,1).setStatus(Status.SUNK);
+		testPlayerE.setCurrStdTile(testB.getStdTile(2, 1));
+		assertEquals("Should find 3 nearest tiles",3,testPlayerE.sink(testB).size());
 	}
 	@Test
 	public void testCaptureTreasure(){
@@ -133,15 +133,12 @@ public class PlayerTest {
 		}
 		assertNotNull("should has treasure",Cave.getFire());
 		assertTrue("5 cards should be enough to capture",testPlayerN2.captureTreasure(testTused));
-		
 		assertEquals("After capture the player remain 1 treasure card",1,testPlayerN2.getCards().size());
 		assertEquals("Should get treasure: Crystal of Fire",COF,testPlayerN2.getTreasures().get(0));
 		assertEquals("AP should run out",0,testPlayerN2.getAP());
-		
 	}
 	@After
-	 public void resetIfGet() throws Exception {
-        Cave.setIfGet(false); //Reset Cave static ifGet
-    }
-
+	public void resetIfGet() throws Exception {
+		Cave.setIfGet(false); //Reset Cave static ifGet
+	}
 }
