@@ -83,15 +83,15 @@ public class MyGameManagerTest {
 		{watchtower,       dunesOfDeception,  foolsLanding,       goldGate,              howlingGarden,        silverGate},
 		{NullTile,         observatory,       mistyMarsh,         lostLagoon,            ironGate,             NullTile},
 		{NullTile,         NullTile,          templeOfTheSun,     templeOfTheMoon,       NullTile,             NullTile},
-	*2. foolsLanding has been SUNK
-	*3. Navigator at observatory and it's SUNK, the surrounded tiles(NOT treasureTile) are also SUNK
+	* 2. foolsLanding has been SUNK
+	* 3. Navigator at observatory and it's SUNK, the surrounded tiles(NOT treasureTile) are also SUNK
 	*   {NullTile,         NullTile,                             twilightHollow,     tidalPalace,           NullTile,             NullTile},
 		{NullTile,         breakersBridge(SUNK),                 bronzeGate,         caveOfEmbers,          caveOfShadows,        NullTile},
 		{whisperingGarden, cliffsOfAbandon(SUNK),                copperGate,         coralPalace,           crimsonForest,        phantomRock},
 		{watchtower,       dunesOfDeception(SUNK),               foolsLanding,       goldGate,              howlingGarden,        silverGate},
 		{NullTile,         observatory(Navigator here,SUNK),     mistyMarsh(SUNK),   lostLagoon(SUNK),      ironGate(SUNK),       NullTile},
 		{NullTile,         NullTile,                             templeOfTheSun,     templeOfTheMoon,       NullTile,             NullTile},
-	*4. Water Level reaches 5 by set 3 Water Meter after using 5 WaterRise card, the relationship shows below
+	* 4. Water Level reaches 5 by set 3 Water Meter after using 5 WaterRise card, the relationship shows below
 	*   //waterMeter(1~10)
 		//waterLevel(2~5)
 		//waterMeter  waterLevel  difficulty
