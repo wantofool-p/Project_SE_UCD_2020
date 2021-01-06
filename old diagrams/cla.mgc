@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="board.tile.TreasureTile" x="694" y="1080">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.StdTile"/>
+        <Association destinationClassName="treasure.TreasureType"
+            endpointName="treasureType" kind="Simple"/>
+        <Communication destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="test_cases.PlayerMovementTest" x="1952" y="1670">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="board.Board"
+            endpointName="testB" kind="Simple"/>
+        <Association destinationClassName="role.Pilot"
+            endpointName="testPlayerP" kind="Simple"/>
+        <Association destinationClassName="role.Explorer"
+            endpointName="testPlayerE" kind="Simple"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="role.Explorer"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="board.tile.Status" x="586" y="275">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="test_cases.AllTest" x="1974" y="1546">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="board.tile.FoolsLanding" x="679" y="1296">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.Gate"/>
+    </Class>
+    <Class name="test_cases.MyGameManagerTest" x="1848" y="2174">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="facade.MyGameManager"
+            endpointName="testMGM" kind="Simple"/>
+        <Communication destinationClassName="board.tile.Temple"/>
+        <Communication destinationClassName="waterMeter.WaterMeter"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="board.tile.Cave"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.Palace"/>
+        <Communication destinationClassName="board.tile.Garden"/>
+        <Communication destinationClassName="facade.MyGameManager"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="treasure.Fire" x="201" y="2076">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="treasure.Treasure"/>
+    </Class>
+    <Class name="deck.treasureCard.WaterRise" x="640" y="874">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+        <Communication destinationClassName="waterMeter.WaterMeter"/>
+        <Communication destinationClassName="deck.FloodDeck"/>
+    </Class>
+    <Class name="board.tile.Temple" x="870" y="19">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.TreasureTile"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="stone" kind="Simple"/>
+    </Class>
+    <Class name="deck.treasureCard.ChaliceCard" x="881" y="270">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="test_cases.PlayerTest" x="1862" y="2020">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="board.Board"
+            endpointName="testB" kind="Simple"/>
+        <Communication destinationClassName="role.Messenger"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.Cave"/>
+        <Communication destinationClassName="role.Engineer"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="role.CheatCharacter" x="208" y="1775">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+    </Class>
+    <Class name="deck.treasureCard.HelicopterLift" x="598" y="795">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="deck.treasureCard.WindCard" x="920" y="480">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="board.tile.Cave" x="579" y="381">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.TreasureTile"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="fire" kind="Simple"/>
+    </Class>
+    <Class name="deck.TreasureDeck" x="180" y="773">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="test_cases.TestRunner" x="1966" y="1586">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="treasure.Treasure" x="658" y="1679">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="treasure.TreasureType"
+            endpointName="treasureType" kind="Simple"/>
+        <Association destinationClassName="role.StdRole"
+            endpointName="currRole" kind="Simple"/>
+    </Class>
+    <Class name="role.Messenger" x="193" y="1228">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="role.StdRole"/>
+    </Class>
+    <Class name="deck.treasureCard.StoneCard" x="886" y="334">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="deck.treasureCard.FireCard" x="909" y="410">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+    </Class>
+    <Class name="board.tile.NullTile" x="673" y="949">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.Tile"/>
+    </Class>
+    <Class name="board.tile.StdTile" x="1959" y="61">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.Tile"/>
+        <Association destinationClassName="role.StdRole"
+            endpointName="players" kind="Simple"/>
+        <Association destinationClassName="board.tile.Status"
+            endpointName="status" kind="Simple"/>
+        <Communication destinationClassName="role.StdRole"/>
+    </Class>
+    <Class name="deck.treasureCard.TreasureCard" x="913" y="563">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="treasure.TreasureType"
+            endpointName="treasureType" kind="Simple"/>
+    </Class>
+    <Class name="role.Diver" x="201" y="1564">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="deck.FloodDeck" x="174" y="596">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="deck.floodCard.FloodCard"/>
+    </Class>
+    <Class name="treasure.Wind" x="199" y="2133">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="treasure.Treasure"/>
+    </Class>
+    <Class name="board.tile.Palace" x="171" y="431">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.TreasureTile"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="chalice" kind="Simple"/>
+    </Class>
+    <Class name="test_cases.BoardTest" x="1914" y="1906">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="board.Board"
+            endpointName="testB" kind="Simple"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="treasure.TreasureType" x="672" y="1369">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="facade.MyGameManager" x="1946" y="515">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="facade.MyInput"/>
+        <Extension destinationClassName="facade.MyOutput"/>
+        <Association destinationClassName="deck.FloodDeck"
+            endpointName="usedFloodDeck" kind="Simple"/>
+        <Association destinationClassName="deck.FloodDeck"
+            endpointName="floodDeck" kind="Simple"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="store" kind="Simple"/>
+        <Association destinationClassName="role.StdRole"
+            endpointName="selectedPlayer" kind="Simple"/>
+        <Association destinationClassName="deck.TreasureDeck"
+            endpointName="treasureDeck" kind="Simple"/>
+        <Association destinationClassName="role.StdRole"
+            endpointName="currPlayer" kind="Simple"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="chalice" kind="Simple"/>
+        <Association destinationClassName="waterMeter.WaterMeter"
+            endpointName="waterMeter" kind="Simple"/>
+        <Association destinationClassName="role.DirectionType"
+            endpointName="int2direction" kind="Simple"/>
+        <Association destinationClassName="deck.TreasureDeck"
+            endpointName="usedTreasureDeck" kind="Simple"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="fire" kind="Simple"/>
+        <Association destinationClassName="board.Board"
+            endpointName="board" kind="Simple"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="wind" kind="Simple"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="deck.FloodDeck"/>
+        <Communication destinationClassName="board.tile.Palace"/>
+        <Communication destinationClassName="role.Pilot"/>
+        <Communication destinationClassName="deck.treasureCard.WaterRise"/>
+        <Communication destinationClassName="facade.MyOutput"/>
+        <Communication destinationClassName="board.tile.Temple"/>
+        <Communication destinationClassName="waterMeter.WaterMeter"/>
+        <Communication destinationClassName="deck.treasureCard.HelicopterLift"/>
+        <Communication destinationClassName="deck.treasureCard.Sandbags"/>
+        <Communication destinationClassName="board.tile.Cave"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="role.Engineer"/>
+        <Communication destinationClassName="deck.TreasureDeck"/>
+        <Communication destinationClassName="role.Navigator"/>
+        <Communication destinationClassName="board.tile.Garden"/>
+        <Communication destinationClassName="facade.MyInput"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="facade.MyOutput" x="988" y="737">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="board.tile.Temple"/>
+        <Communication destinationClassName="deck.treasureCard.TreasureCard"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="board.tile.Cave"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.Palace"/>
+        <Communication destinationClassName="role.Pilot"/>
+        <Communication destinationClassName="board.tile.Garden"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="waterMeter.WaterMeter" x="662" y="1843">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="deck.floodCard.FloodCard" x="583" y="568">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="stdTile" kind="Simple"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="role.Explorer" x="197" y="1453">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="deck.treasureCard.Sandbags" x="586" y="699">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="deck.treasureCard.TreasureCard"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="board.tile.Gate" x="571" y="197">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="role.StdRole" x="1090" y="1035">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association
+            destinationClassName="deck.treasureCard.TreasureCard"
+            endpointName="cards" kind="Simple"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="treasures" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="currStdTile" kind="Simple"/>
+        <Communication destinationClassName="deck.treasureCard.TreasureCard"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="board.tile.Garden" x="563" y="24">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="board.tile.TreasureTile"/>
+        <Association destinationClassName="treasure.Treasure"
+            endpointName="wind" kind="Simple"/>
+    </Class>
+    <Class name="role.DirectionType" x="645" y="2023">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="test_cases.DeckTest" x="1930" y="1768">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="deck.FloodDeck"/>
+        <Communication destinationClassName="deck.TreasureDeck"/>
+    </Class>
+    <Class name="board.Board" x="172" y="8">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="mistyMarsh" kind="Simple"/>
+        <Association destinationClassName="board.tile.Gate"
+            endpointName="bronzeGate" kind="Simple"/>
+        <Association destinationClassName="board.tile.Gate"
+            endpointName="ironGate" kind="Simple"/>
+        <Association destinationClassName="board.tile.Cave"
+            endpointName="caveOfEmbers" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="breakersBridge" kind="Simple"/>
+        <Association destinationClassName="board.tile.NullTile"
+            endpointName="NullTile" kind="Simple"/>
+        <Association destinationClassName="board.tile.Gate"
+            endpointName="goldGate" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="observatory" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="dunesOfDeception" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="cliffsOfAbandon" kind="Simple"/>
+        <Association destinationClassName="board.tile.Gate"
+            endpointName="copperGate" kind="Simple"/>
+        <Association destinationClassName="board.tile.Gate"
+            endpointName="silverGate" kind="Simple"/>
+        <Association destinationClassName="board.tile.Palace"
+            endpointName="tidalPalace" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="lostLagoon" kind="Simple"/>
+        <Association destinationClassName="board.tile.Palace"
+            endpointName="coralPalace" kind="Simple"/>
+        <Association destinationClassName="board.tile.Temple"
+            endpointName="templeOfTheMoon" kind="Simple"/>
+        <Association destinationClassName="board.tile.Garden"
+            endpointName="whisperingGarden" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="phantomRock" kind="Simple"/>
+        <Association destinationClassName="board.tile.FoolsLanding"
+            endpointName="foolsLanding" kind="Simple"/>
+        <Association destinationClassName="board.tile.Temple"
+            endpointName="templeOfTheSun" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="watchtower" kind="Simple"/>
+        <Association destinationClassName="board.tile.Garden"
+            endpointName="howlingGarden" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="crimsonForest" kind="Simple"/>
+        <Association destinationClassName="board.tile.Cave"
+            endpointName="caveOfShadows" kind="Simple"/>
+        <Association destinationClassName="role.StdRole"
+            endpointName="playerList" kind="Simple"/>
+        <Association destinationClassName="board.tile.StdTile"
+            endpointName="twilightHollow" kind="Simple"/>
+        <Communication destinationClassName="board.tile.Temple"/>
+        <Communication destinationClassName="board.tile.Cave"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.Palace"/>
+        <Communication destinationClassName="board.tile.Tile"/>
+        <Communication destinationClassName="board.tile.Garden"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="setting.Options" x="660" y="1501">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="treasure.Chalice" x="200" y="2016">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="treasure.Treasure"/>
+    </Class>
+    <Class name="role.Pilot" x="193" y="1306">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="role.Engineer" x="195" y="1855">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="treasure.Stone" x="199" y="1941">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="treasure.Treasure"/>
+    </Class>
+    <Class name="board.tile.Tile" x="678" y="1187">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+    </Class>
+    <Class name="role.Navigator" x="202" y="1678">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Extension destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.Board"/>
+        <Communication destinationClassName="role.StdRole"/>
+        <Communication destinationClassName="board.tile.StdTile"/>
+    </Class>
+    <Class name="Main" x="23" y="16">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="setting.Options"/>
+        <Communication destinationClassName="facade.MyGameManager"/>
+    </Class>
+    <Class name="facade.MyInput" x="188" y="987">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="true"
+            accessors-accepted="true" constructors-accepted="true"/>
+        <Communication destinationClassName="board.Board"/>
+    </Class>
+</ClassDiagram>
